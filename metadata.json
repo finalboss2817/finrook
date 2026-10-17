@@ -1,0 +1,8 @@
+{
+  "name": "Finrook — Your Next Move Backed by the Rook",
+  "description": "An immersive, story-driven website for Finrook, working across brand management, creator partnerships, event management, and content creation.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

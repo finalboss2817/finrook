@@ -102,37 +102,37 @@ export const InteractiveProofShowcase: React.FC<InteractiveProofShowcaseProps> =
   const current = verticals[activeTab];
 
   return (
-    <section id="work" className="py-24 bg-[#FAF8F5] border-t border-[#ECE6D8] relative">
-      <div className="max-w-7xl mx-auto px-5 sm:px-8">
+    <section id="work" className="py-16 sm:py-24 bg-[#FAF8F5] border-t border-[#ECE6D8] relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8">
         
-        {/* Chakli-style Heading */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+        {/* Heading */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12 gap-5 sm:gap-6">
           <div>
-            <div className="flex items-center gap-2 mb-3">
+            <div className="flex items-center gap-2 mb-2.5 sm:mb-3">
               <FinrookLogo size={18} primaryColor="#FF4D38" contrastColor="#141518" />
               <span className="text-xs font-bold uppercase tracking-widest text-[#FF4D38]">
                 Clear Deliverables
               </span>
             </div>
-            <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-[#141518] leading-tight">
+            <h2 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-[#141518] leading-tight">
               Scope of Work for{' '}
               <span className="text-[#FF4D38] underline decoration-4 underline-offset-8">
                 Every Move.
               </span>
             </h2>
           </div>
-          <p className="text-sm sm:text-base text-[#646770] max-w-md">
+          <p className="text-xs sm:text-sm md:text-base text-[#646770] max-w-md">
             No vague promises or hidden gaps. Click each vertical to see the exact structure, pillars, and deliverables Finrook executes.
           </p>
         </div>
 
-        {/* Tab Switcher (Chakli Pill Style) */}
-        <div className="flex flex-wrap items-center gap-2 sm:gap-3 p-1.5 bg-[#FFFFFF] rounded-2xl border border-[#E5DFC0] shadow-sm mb-10 w-fit">
+        {/* Tab Switcher */}
+        <div className="grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-1.5 sm:gap-3 p-1.5 bg-[#FFFFFF] rounded-2xl border border-[#E5DFC0] shadow-sm mb-8 sm:mb-10 w-full sm:w-fit">
           {verticals.map((tab, idx) => (
             <button
               key={idx}
               onClick={() => setActiveTab(idx)}
-              className={`px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer ${
+              className={`px-3 sm:px-5 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer text-center ${
                 activeTab === idx
                   ? 'bg-[#141518] text-[#FAF8F5] shadow-md'
                   : 'text-[#646770] hover:text-[#141518] hover:bg-[#FAF8F5]'
@@ -144,12 +144,12 @@ export const InteractiveProofShowcase: React.FC<InteractiveProofShowcaseProps> =
         </div>
 
         {/* Tab Content Card */}
-        <div className="bg-[#FFFFFF] rounded-3xl border border-[#E5DFC0] shadow-sm p-6 sm:p-10 lg:p-12 transition-all">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        <div className="bg-[#FFFFFF] rounded-2xl sm:rounded-3xl border border-[#E5DFC0] shadow-sm p-5 sm:p-8 lg:p-12 transition-all">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
             
             {/* Left Column: Image & Tagline */}
             <div className="lg:col-span-5 flex flex-col">
-              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-[#141518] shadow-md mb-4 group">
+              <div className="relative aspect-[16/10] sm:aspect-[4/3] rounded-xl sm:rounded-2xl overflow-hidden bg-[#141518] shadow-md mb-4 group">
                 <img
                   src={current.image}
                   alt={current.headline}
@@ -157,19 +157,19 @@ export const InteractiveProofShowcase: React.FC<InteractiveProofShowcaseProps> =
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                 
-                <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-white text-xs font-semibold">
-                  <span className="bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-white/20">
+                <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 right-3 sm:right-4 flex items-center justify-between text-white text-[11px] sm:text-xs font-semibold">
+                  <span className="bg-black/60 backdrop-blur-md px-2.5 sm:px-3 py-1 rounded-full border border-white/20 truncate max-w-[55%]">
                     {current.category}
                   </span>
-                  <span className="bg-[#FF4D38] px-2.5 py-1 rounded-full font-bold">
+                  <span className="bg-[#FF4D38] px-2.5 py-1 rounded-full font-bold shrink-0">
                     Finrook Execution
                   </span>
                 </div>
               </div>
 
               {/* Tagline Box */}
-              <div className="p-4 rounded-xl bg-[#FAF8F5] border border-[#ECE6D8] flex items-center gap-3">
-                <ShieldCheck className="w-5 h-5 text-[#FF4D38] shrink-0" />
+              <div className="p-3.5 sm:p-4 rounded-xl bg-[#FAF8F5] border border-[#ECE6D8] flex items-center gap-2.5 sm:gap-3">
+                <ShieldCheck className="w-4 sm:w-5 h-4 sm:h-5 text-[#FF4D38] shrink-0" />
                 <p className="text-xs sm:text-sm font-semibold text-[#141518]">
                   {current.tagline}
                 </p>
@@ -179,22 +179,22 @@ export const InteractiveProofShowcase: React.FC<InteractiveProofShowcaseProps> =
             {/* Right Column: Narrative, Pillars & Deliverables */}
             <div className="lg:col-span-7 flex flex-col justify-between">
               <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-[#FF4D38] mb-2 block">
+                <span className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-[#FF4D38] mb-1.5 block">
                   {current.category}
                 </span>
 
-                <h3 className="text-2xl sm:text-3xl font-black text-[#141518] mb-3 leading-tight">
+                <h3 className="text-xl sm:text-2xl md:text-3xl font-black text-[#141518] mb-2.5 sm:mb-3 leading-tight">
                   {current.headline}
                 </h3>
 
-                <p className="text-sm sm:text-base text-[#646770] leading-relaxed mb-6">
+                <p className="text-xs sm:text-sm md:text-base text-[#646770] leading-relaxed mb-5 sm:mb-6">
                   {current.summary}
                 </p>
 
                 {/* 4 Execution Pillars Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 mb-5 sm:mb-6">
                   {current.pillars.map((pil, pIdx) => (
-                    <div key={pIdx} className="p-3.5 rounded-xl bg-[#FAF8F5] border border-[#ECE6D8]">
+                    <div key={pIdx} className="p-3 sm:p-3.5 rounded-xl bg-[#FAF8F5] border border-[#ECE6D8]">
                       <h4 className="text-xs font-bold text-[#141518] mb-1 flex items-center gap-1.5">
                         <span className="w-1.5 h-1.5 rounded-full bg-[#FF4D38]"></span>
                         {pil.title}
@@ -207,7 +207,7 @@ export const InteractiveProofShowcase: React.FC<InteractiveProofShowcaseProps> =
                 </div>
 
                 {/* Deliverables Checklist */}
-                <div className="pt-4 border-t border-[#ECE6D8] mb-6">
+                <div className="pt-4 border-t border-[#ECE6D8] mb-5 sm:mb-6">
                   <h4 className="text-xs font-bold uppercase tracking-wider text-[#141518] mb-3 flex items-center gap-2">
                     <FileText className="w-3.5 h-3.5 text-[#FF4D38]" />
                     <span>Included in This Move</span>
@@ -215,7 +215,7 @@ export const InteractiveProofShowcase: React.FC<InteractiveProofShowcaseProps> =
                   <div className="space-y-2">
                     {current.deliverables.map((item, dIdx) => (
                       <div key={dIdx} className="flex items-start gap-2.5 text-xs sm:text-sm text-[#4B4E58]">
-                        <Check className="w-4 h-4 text-[#FF4D38] shrink-0 mt-0.5" />
+                        <Check className="w-3.5 sm:w-4 h-3.5 sm:h-4 text-[#FF4D38] shrink-0 mt-0.5" />
                         <span>{item}</span>
                       </div>
                     ))}
@@ -224,13 +224,13 @@ export const InteractiveProofShowcase: React.FC<InteractiveProofShowcaseProps> =
               </div>
 
               {/* Bottom Action Trigger */}
-              <div className="pt-4 border-t border-[#ECE6D8] flex flex-wrap items-center justify-between gap-4">
+              <div className="pt-4 border-t border-[#ECE6D8] flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-4">
                 <span className="text-xs text-[#646770]">
                   Need this move for your organization?
                 </span>
                 <button
                   onClick={() => onOpenModal(current.tabLabel)}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#141518] hover:bg-[#FF4D38] text-white text-xs sm:text-sm font-bold transition-all shadow-sm group"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-[#141518] hover:bg-[#FF4D38] text-white text-xs sm:text-sm font-bold transition-all shadow-sm group cursor-pointer"
                 >
                   <span>Inquire about {current.tabLabel}</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

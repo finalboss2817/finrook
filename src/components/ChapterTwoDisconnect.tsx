@@ -39,36 +39,36 @@ export const ChapterTwoDisconnect: React.FC = () => {
   return (
     <section
       id="story"
-      className="py-24 px-6 lg:px-16 bg-[#F5F2EB] border-b border-[#E5DFC0]"
+      className="py-16 sm:py-24 px-4 sm:px-8 lg:px-16 bg-[#F5F2EB] border-b border-[#E5DFC0]"
     >
       <div className="max-w-7xl mx-auto w-full">
         {/* Chapter Header */}
-        <div className="pb-6 border-b border-[#E5DFC0] flex items-center justify-between text-xs tracking-wider uppercase text-[#6E6A61] font-mono">
+        <div className="pb-5 sm:pb-6 border-b border-[#E5DFC0] flex items-center justify-between text-xs tracking-wider uppercase text-[#6E6A61] font-mono">
           <span className="font-semibold text-[#141518]">THE REALITY CHECK</span>
           <span className="text-[#5C5952]">CHAPTER 03 · THE DISCONNECT</span>
         </div>
 
         {/* Narrative Heading */}
-        <div className="mt-12 max-w-3xl">
-          <div className="inline-block text-xs font-bold uppercase tracking-wider text-[#E1382B] mb-3">
+        <div className="mt-8 sm:mt-12 max-w-3xl">
+          <div className="inline-block text-xs font-bold uppercase tracking-wider text-[#E1382B] mb-2.5 sm:mb-3">
             Why Ambitious Moves Stall
           </div>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#141518] leading-tight">
+          <h2 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#141518] leading-tight">
             Having an idea is one thing. <br />
             <span className="text-[#E1382B]">Connecting the pieces is another.</span>
           </h2>
 
-          <p className="mt-6 text-base sm:text-lg text-[#5C5952] leading-relaxed font-normal">
+          <p className="mt-4 sm:mt-6 text-sm sm:text-base md:text-lg text-[#5C5952] leading-relaxed font-normal">
             A brand needs direction. A creator needs genuine paid opportunities. An event needs technical coordination and crowd momentum. And content needs purpose. When these pieces operate in silos, you burn time and money.
           </p>
 
           {/* Interactive Toggle Switch */}
-          <div className="mt-8 flex items-center gap-4 bg-[#FFFFFF] p-2 rounded-xl border border-[#E5DFC0] w-fit shadow-xs">
+          <div className="mt-6 sm:mt-8 flex flex-col xs:flex-row items-stretch xs:items-center gap-2 p-1.5 sm:p-2 rounded-xl bg-[#FFFFFF] border border-[#E5DFC0] w-full xs:w-fit shadow-xs">
             <button
               type="button"
               onClick={() => setShowAligned(false)}
-              className={`px-4 py-2 text-xs font-bold rounded-lg transition-all cursor-pointer flex items-center gap-2 ${
+              className={`w-full xs:w-auto px-4 py-2.5 text-xs font-bold rounded-lg transition-all cursor-pointer flex items-center justify-center gap-2 ${
                 !showAligned
                   ? 'bg-[#141518] text-white shadow-2xs'
                   : 'text-[#6E6A61] hover:text-[#141518]'
@@ -81,7 +81,7 @@ export const ChapterTwoDisconnect: React.FC = () => {
             <button
               type="button"
               onClick={() => setShowAligned(true)}
-              className={`px-4 py-2 text-xs font-bold rounded-lg transition-all cursor-pointer flex items-center gap-2 ${
+              className={`w-full xs:w-auto px-4 py-2.5 text-xs font-bold rounded-lg transition-all cursor-pointer flex items-center justify-center gap-2 ${
                 showAligned
                   ? 'bg-[#E1382B] text-white shadow-2xs'
                   : 'text-[#6E6A61] hover:text-[#141518]'
@@ -94,11 +94,11 @@ export const ChapterTwoDisconnect: React.FC = () => {
         </div>
 
         {/* Pillars Comparison Cards */}
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="mt-8 sm:mt-12 grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
           {pillars.map((pillar) => (
             <div
               key={pillar.id}
-              className={`p-7 rounded-xl border transition-all duration-300 ${
+              className={`p-5 sm:p-7 rounded-2xl border transition-all duration-300 ${
                 showAligned
                   ? 'bg-[#FFFFFF] border-[#C5A869]/60 shadow-sm'
                   : 'bg-[#FFFFFF] border-[#E5DFC0] shadow-2xs'

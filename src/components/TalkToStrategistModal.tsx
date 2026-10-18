@@ -39,35 +39,35 @@ export const TalkToStrategistModal: React.FC<TalkToStrategistModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md animate-fadeIn">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/60 backdrop-blur-md animate-fadeIn">
       {/* Modal Card */}
       <div 
-        className="relative w-full max-w-lg bg-[#FFFFFF] rounded-2xl shadow-2xl border border-[#E5DFC0] overflow-hidden transform transition-all duration-300 scale-100"
+        className="relative w-full max-w-lg bg-[#FFFFFF] rounded-2xl shadow-2xl border border-[#E5DFC0] overflow-hidden transform transition-all duration-300 scale-100 max-h-[92vh] flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header Ribbon */}
-        <div className="bg-[#FAF8F5] border-b border-[#ECE6D8] px-6 py-4 flex items-center justify-between">
+        <div className="bg-[#FAF8F5] border-b border-[#ECE6D8] px-5 sm:px-6 py-3.5 sm:py-4 flex items-center justify-between shrink-0">
           <div>
-            <span className="inline-block text-[11px] font-bold uppercase tracking-wider text-[#FF4D38] bg-[#FF4D38]/10 px-2.5 py-0.5 rounded-full mb-1">
+            <span className="inline-block text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-[#FF4D38] bg-[#FF4D38]/10 px-2.5 py-0.5 rounded-full mb-1">
               Direct Strategist Line
             </span>
-            <h3 className="text-xl font-bold text-[#141518]">Talk to a Strategist</h3>
+            <h3 className="text-lg sm:text-xl font-bold text-[#141518]">Talk to a Strategist</h3>
           </div>
           <button
             onClick={onClose}
-            className="p-2 text-[#646770] hover:text-[#141518] hover:bg-[#EAE4D7] rounded-full transition-colors"
+            className="p-2 text-[#646770] hover:text-[#141518] hover:bg-[#EAE4D7] rounded-full transition-colors cursor-pointer"
             aria-label="Close"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
-        {/* Instant Contact Pills */}
-        <div className="p-6 pt-5">
-          <div className="grid grid-cols-2 gap-3 mb-6">
+        {/* Instant Contact Pills & Scrollable Body */}
+        <div className="p-5 sm:p-6 overflow-y-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 mb-5 sm:mb-6">
             <a
               href="tel:9920300750"
-              className="flex items-center justify-center gap-2.5 py-3 px-4 rounded-xl bg-[#FAF8F5] border border-[#E5DFC0] hover:border-[#FF4D38] hover:bg-[#FF4D38]/5 text-[#141518] font-semibold text-sm transition-all group shadow-sm"
+              className="flex items-center justify-center gap-2.5 py-2.5 sm:py-3 px-4 rounded-xl bg-[#FAF8F5] border border-[#E5DFC0] hover:border-[#FF4D38] hover:bg-[#FF4D38]/5 text-[#141518] font-semibold text-xs sm:text-sm transition-all group shadow-sm text-center"
             >
               <Phone className="w-4 h-4 text-[#FF4D38] group-hover:scale-110 transition-transform" />
               <span>Call +91 99203 •••••</span>
@@ -75,7 +75,7 @@ export const TalkToStrategistModal: React.FC<TalkToStrategistModalProps> = ({
             <button
               type="button"
               onClick={handleWhatsAppDirect}
-              className="flex items-center justify-center gap-2.5 py-3 px-4 rounded-xl bg-[#25D366]/10 border border-[#25D366]/30 hover:bg-[#25D366]/20 text-[#128C7E] font-semibold text-sm transition-all group shadow-sm"
+              className="flex items-center justify-center gap-2.5 py-2.5 sm:py-3 px-4 rounded-xl bg-[#25D366]/10 border border-[#25D366]/30 hover:bg-[#25D366]/20 text-[#128C7E] font-semibold text-xs sm:text-sm transition-all group shadow-sm text-center cursor-pointer"
             >
               <MessageCircle className="w-4 h-4 text-[#25D366] group-hover:scale-110 transition-transform" />
               <span>WhatsApp Us</span>
@@ -84,7 +84,7 @@ export const TalkToStrategistModal: React.FC<TalkToStrategistModalProps> = ({
 
           <div className="relative flex py-2 items-center mb-5">
             <div className="flex-grow border-t border-[#ECE6D8]"></div>
-            <span className="flex-shrink mx-3 text-xs uppercase tracking-wider text-[#8A8D98] font-medium">Or request a callback</span>
+            <span className="flex-shrink mx-3 text-[11px] sm:text-xs uppercase tracking-wider text-[#8A8D98] font-medium">Or request a callback</span>
             <div className="flex-grow border-t border-[#ECE6D8]"></div>
           </div>
 
@@ -99,16 +99,16 @@ export const TalkToStrategistModal: React.FC<TalkToStrategistModalProps> = ({
               </p>
               <button
                 onClick={onClose}
-                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#141518] text-white text-sm font-semibold hover:bg-[#2A2C35] transition-colors"
+                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#141518] text-white text-sm font-semibold hover:bg-[#2A2C35] transition-colors cursor-pointer"
               >
                 Close Window
               </button>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-3.5 sm:space-y-4">
               <div>
                 <label className="block text-xs font-bold uppercase tracking-wider text-[#646770] mb-1.5">
-                  Your Full Name
+                  Your Full Name *
                 </label>
                 <input
                   type="text"
@@ -116,7 +116,7 @@ export const TalkToStrategistModal: React.FC<TalkToStrategistModalProps> = ({
                   placeholder="e.g. Rahul Sharma"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full px-4 py-2.5 rounded-xl border border-[#D8D2C4] bg-[#FAF8F5] text-[#141518] placeholder-[#9CA3AF] text-sm focus:outline-none focus:ring-2 focus:ring-[#FF4D38]/30 focus:border-[#FF4D38] transition-all"
+                  className="w-full px-3.5 sm:px-4 py-2.5 rounded-xl border border-[#D8D2C4] bg-[#FAF8F5] text-[#141518] placeholder-[#9CA3AF] text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-[#FF4D38]/30 focus:border-[#FF4D38] transition-all"
                 />
               </div>
 
@@ -131,7 +131,7 @@ export const TalkToStrategistModal: React.FC<TalkToStrategistModalProps> = ({
                     placeholder="+91 99203 00750"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full px-4 py-2.5 rounded-xl border border-[#D8D2C4] bg-[#FAF8F5] text-[#141518] placeholder-[#9CA3AF] text-sm focus:outline-none focus:ring-2 focus:ring-[#FF4D38]/30 focus:border-[#FF4D38] transition-all"
+                    className="w-full px-3.5 sm:px-4 py-2.5 rounded-xl border border-[#D8D2C4] bg-[#FAF8F5] text-[#141518] placeholder-[#9CA3AF] text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-[#FF4D38]/30 focus:border-[#FF4D38] transition-all"
                   />
                 </div>
 
@@ -144,7 +144,7 @@ export const TalkToStrategistModal: React.FC<TalkToStrategistModalProps> = ({
                     placeholder="name@company.com"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-4 py-2.5 rounded-xl border border-[#D8D2C4] bg-[#FAF8F5] text-[#141518] placeholder-[#9CA3AF] text-sm focus:outline-none focus:ring-2 focus:ring-[#FF4D38]/30 focus:border-[#FF4D38] transition-all"
+                    className="w-full px-3.5 sm:px-4 py-2.5 rounded-xl border border-[#D8D2C4] bg-[#FAF8F5] text-[#141518] placeholder-[#9CA3AF] text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-[#FF4D38]/30 focus:border-[#FF4D38] transition-all"
                   />
                 </div>
               </div>

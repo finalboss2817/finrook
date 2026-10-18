@@ -165,7 +165,16 @@ export const CinematicRook: React.FC<CinematicRookProps> = ({
       mouseY = -(((e.clientY - rect.top) / rect.height) * 2 - 1);
     };
 
+    const handleTouchMove = (e: TouchEvent) => {
+      if (!interactive || e.touches.length === 0) return;
+      const touch = e.touches[0];
+      const rect = container.getBoundingClientRect();
+      mouseX = ((touch.clientX - rect.left) / rect.width) * 2 - 1;
+      mouseY = -(((touch.clientY - rect.top) / rect.height) * 2 - 1);
+    };
+
     window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('touchmove', handleTouchMove, { passive: true });
 
     const handleResize = () => {
       if (!container) return;
@@ -198,6 +207,7 @@ export const CinematicRook: React.FC<CinematicRookProps> = ({
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('touchmove', handleTouchMove);
       window.removeEventListener('resize', handleResize);
       cancelAnimationFrame(animationId);
       if (renderer && renderer.domElement && container.contains(renderer.domElement)) {
@@ -209,8 +219,8 @@ export const CinematicRook: React.FC<CinematicRookProps> = ({
 
   if (useFallback) {
     return (
-      <div className={`relative flex items-center justify-center p-8 ${className}`}>
-        <FinrookLogo size={240} />
+      <div className={`relative flex items-center justify-center p-4 sm:p-8 ${className}`}>
+        <FinrookLogo size={200} />
       </div>
     );
   }
@@ -218,7 +228,7 @@ export const CinematicRook: React.FC<CinematicRookProps> = ({
   return (
     <div
       ref={containerRef}
-      className={`relative w-full h-full min-h-[380px] md:min-h-[460px] select-none cursor-grab active:cursor-grabbing ${className}`}
+      className={`relative w-full h-full min-h-[260px] xs:min-h-[300px] sm:min-h-[380px] md:min-h-[440px] select-none cursor-grab active:cursor-grabbing ${className}`}
       aria-label="Interactive Finrook 3D Rook"
     />
   );

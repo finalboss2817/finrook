@@ -8,54 +8,54 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="bg-[#141518] text-[#FAF8F5] py-16 px-6 lg:px-16 border-t border-[#2A2C33]">
+    <footer className="bg-[#141518] text-[#FAF8F5] py-12 sm:py-16 px-4 sm:px-8 lg:px-16 border-t border-[#2A2C33]">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-[#2A2C33]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-8 sm:gap-10 pb-10 sm:pb-12 border-b border-[#2A2C33]">
           {/* Brand & Tagline */}
-          <div className="md:col-span-5 flex flex-col justify-between">
+          <div className="sm:col-span-2 md:col-span-5 flex flex-col justify-between">
             <div>
               <div className="flex items-center gap-3">
-                <FinrookLogo size={36} contrastColor="#FAF8F5" primaryColor="#E1382B" />
-                <span className="text-xl font-extrabold tracking-tight text-white">
+                <FinrookLogo size={34} contrastColor="#FAF8F5" primaryColor="#E1382B" />
+                <span className="text-lg sm:text-xl font-extrabold tracking-tight text-white">
                   FINROOK
                 </span>
               </div>
-              <p className="mt-3 text-sm text-[#E1382B] font-semibold">
+              <p className="mt-2.5 sm:mt-3 text-xs sm:text-sm text-[#E1382B] font-semibold">
                 Your next move backed by the rook.
               </p>
-              <p className="mt-3 text-xs text-[#A09C94] max-w-sm leading-relaxed">
+              <p className="mt-2.5 sm:mt-3 text-xs text-[#A09C94] max-w-sm leading-relaxed">
                 Strategic brand management, creator sponsorships and partnerships, live event management of all kinds, and high-impact digital content creation.
               </p>
             </div>
 
-            <div className="mt-8 text-xs text-[#737068] font-mono">
+            <div className="mt-6 sm:mt-8 text-xs text-[#737068] font-mono">
               © {new Date().getFullYear()} Finrook. All rights reserved.
             </div>
           </div>
 
           {/* Capabilities Navigation */}
           <div className="md:col-span-3">
-            <div className="text-xs font-mono uppercase tracking-wider text-[#E1382B] font-bold mb-4">
+            <div className="text-xs font-mono uppercase tracking-wider text-[#E1382B] font-bold mb-3 sm:mb-4">
               Disciplines
             </div>
-            <ul className="space-y-2.5 text-xs text-[#A09C94]">
+            <ul className="space-y-2 text-xs text-[#A09C94]">
               <li>
-                <a href="#arenas" className="hover:text-white transition-colors">
+                <a href="#services" className="hover:text-white transition-colors">
                   Brand Management & Identity
                 </a>
               </li>
               <li>
-                <a href="#arenas" className="hover:text-white transition-colors">
+                <a href="#services" className="hover:text-white transition-colors">
                   Creator Management & Deals
                 </a>
               </li>
               <li>
-                <a href="#arenas" className="hover:text-white transition-colors">
+                <a href="#services" className="hover:text-white transition-colors">
                   Live Event Coordination
                 </a>
               </li>
               <li>
-                <a href="#arenas" className="hover:text-white transition-colors">
+                <a href="#services" className="hover:text-white transition-colors">
                   Content Creation & Management
                 </a>
               </li>
@@ -101,7 +101,7 @@ export const Footer: React.FC = () => {
 
             <div className="mt-6 pt-6 border-t border-[#2A2C33]">
               <span className="text-[11px] font-mono text-[#737068]">
-                LOCATION: Mumbai, Maharashtra • India
+                LOCATIONS: Mumbai, India • Dubai, UAE • Manila, Philippines
               </span>
             </div>
           </div>

@@ -81,54 +81,51 @@ export const AgencyCardsGrid: React.FC<AgencyCardsGridProps> = ({ onSelectServic
   ];
 
   return (
-    <section id="services" className="py-24 bg-[#FAF8F5] relative">
-      <div className="max-w-7xl mx-auto px-5 sm:px-8">
+    <section id="services" className="py-16 sm:py-24 bg-[#FAF8F5] relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8">
         
-        {/* Chakli-style Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        {/* Header */}
+        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
           <span className="text-xs font-bold uppercase tracking-widest text-[#FF4D38] bg-[#FF4D38]/10 px-3.5 py-1 rounded-full inline-block mb-3">
             Our Core Verticals
           </span>
-          <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-[#141518] leading-tight mb-4">
+          <h2 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-[#141518] leading-tight mb-4">
             We are a strategic agency that brings{' '}
             <span className="text-[#FF4D38]">real business results.</span>
           </h2>
-          <p className="text-base sm:text-lg text-[#646770] leading-relaxed">
+          <p className="text-sm sm:text-base md:text-lg text-[#646770] leading-relaxed">
             No endless jargon or buzzwords. We focus on four clear pillars that actually move the needle for your business, talent, or event.
           </p>
         </div>
 
-        {/* 2x2 Agency Cards Grid (Chakli Agency Card Style) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
-          {services.map((service, index) => {
-            const Icon = service.icon;
-            const isHovered = hoveredCard === service.id;
-
+        {/* 2x2 Agency Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 lg:gap-10">
+          {services.map((service) => {
             return (
               <div
                 key={service.id}
                 onMouseEnter={() => setHoveredCard(service.id)}
                 onMouseLeave={() => setHoveredCard(null)}
                 onClick={() => onSelectService(service.title)}
-                className="group relative bg-[#FFFFFF] rounded-3xl border border-[#E5DFC0] hover:border-[#FF4D38] p-6 sm:p-8 shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col justify-between overflow-hidden"
+                className="group relative bg-[#FFFFFF] rounded-2xl sm:rounded-3xl border border-[#E5DFC0] hover:border-[#FF4D38] p-5 sm:p-8 shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col justify-between overflow-hidden"
               >
                 {/* Top Row: Number & Badge */}
-                <div className="flex items-center justify-between mb-6">
-                  <div className="flex items-center gap-3">
-                    <span className="text-2xl font-black text-[#FF4D38] tracking-tighter">
+                <div className="flex items-center justify-between mb-5 sm:mb-6">
+                  <div className="flex items-center gap-2.5 sm:gap-3">
+                    <span className="text-xl sm:text-2xl font-black text-[#FF4D38] tracking-tighter">
                       {service.number}
                     </span>
-                    <span className="text-xs uppercase font-bold tracking-wider text-[#646770] bg-[#FAF8F5] border border-[#ECE6D8] px-3 py-1 rounded-full">
+                    <span className="text-[11px] sm:text-xs uppercase font-bold tracking-wider text-[#646770] bg-[#FAF8F5] border border-[#ECE6D8] px-2.5 sm:px-3 py-1 rounded-full">
                       {service.badge}
                     </span>
                   </div>
-                  <div className="w-10 h-10 rounded-full bg-[#FAF8F5] group-hover:bg-[#FF4D38] text-[#141518] group-hover:text-white flex items-center justify-center transition-all duration-300 shadow-sm">
-                    <ArrowUpRight className="w-5 h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  <div className="w-9 sm:w-10 h-9 sm:h-10 rounded-full bg-[#FAF8F5] group-hover:bg-[#FF4D38] text-[#141518] group-hover:text-white flex items-center justify-center transition-all duration-300 shadow-sm shrink-0">
+                    <ArrowUpRight className="w-4 sm:w-5 h-4 sm:h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                   </div>
                 </div>
 
-                {/* Layered Image Showcase (Chakli Style figure + figcaption) */}
-                <div className="relative aspect-[16/9] w-full rounded-2xl overflow-hidden mb-6 bg-[#141518] shadow-inner">
+                {/* Layered Image Showcase */}
+                <div className="relative aspect-[16/9] w-full rounded-xl sm:rounded-2xl overflow-hidden mb-5 sm:mb-6 bg-[#141518] shadow-inner">
                   <img
                     src={service.image}
                     alt={service.title}
@@ -137,11 +134,11 @@ export const AgencyCardsGrid: React.FC<AgencyCardsGridProps> = ({ onSelectServic
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80 group-hover:opacity-60 transition-opacity"></div>
                   
                   {/* Floating pill on bottom of image */}
-                  <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between pointer-events-none">
-                    <span className="text-xs font-bold text-white bg-black/40 backdrop-blur-md px-3 py-1 rounded-full border border-white/20">
+                  <div className="absolute bottom-2.5 sm:bottom-3 left-2.5 sm:left-3 right-2.5 sm:right-3 flex items-center justify-between pointer-events-none">
+                    <span className="text-[11px] sm:text-xs font-bold text-white bg-black/40 backdrop-blur-md px-2.5 sm:px-3 py-1 rounded-full border border-white/20">
                       {service.tag}
                     </span>
-                    <span className="text-xs font-semibold text-white/90 bg-[#FF4D38] px-2.5 py-0.5 rounded-full">
+                    <span className="text-[10px] sm:text-xs font-semibold text-white/90 bg-[#FF4D38] px-2.5 py-0.5 rounded-full">
                       Click to Consult
                     </span>
                   </div>
@@ -149,10 +146,10 @@ export const AgencyCardsGrid: React.FC<AgencyCardsGridProps> = ({ onSelectServic
 
                 {/* Content Block */}
                 <div>
-                  <h3 className="text-2xl font-black text-[#141518] mb-2.5 group-hover:text-[#FF4D38] transition-colors">
+                  <h3 className="text-xl sm:text-2xl font-black text-[#141518] mb-2 sm:mb-2.5 group-hover:text-[#FF4D38] transition-colors">
                     {service.title}
                   </h3>
-                  <p className="text-sm sm:text-base text-[#646770] mb-6 leading-relaxed">
+                  <p className="text-xs sm:text-sm md:text-base text-[#646770] mb-5 sm:mb-6 leading-relaxed">
                     {service.description}
                   </p>
 
@@ -160,7 +157,7 @@ export const AgencyCardsGrid: React.FC<AgencyCardsGridProps> = ({ onSelectServic
                   <div className="space-y-2 pt-4 border-t border-[#ECE6D8]">
                     {service.deliverables.map((item, dIdx) => (
                       <div key={dIdx} className="flex items-start gap-2 text-xs sm:text-sm text-[#4B4E58]">
-                        <Check className="w-4 h-4 text-[#FF4D38] shrink-0 mt-0.5" />
+                        <Check className="w-3.5 sm:w-4 h-3.5 sm:h-4 text-[#FF4D38] shrink-0 mt-0.5" />
                         <span>{item}</span>
                       </div>
                     ))}
@@ -168,9 +165,11 @@ export const AgencyCardsGrid: React.FC<AgencyCardsGridProps> = ({ onSelectServic
                 </div>
 
                 {/* Bottom Action Strip */}
-                <div className="mt-8 pt-4 flex items-center justify-between text-xs font-bold text-[#141518] group-hover:text-[#FF4D38] transition-colors">
+                <div className="mt-6 sm:mt-8 pt-4 flex flex-col xs:flex-row xs:items-center justify-between gap-2 text-xs font-bold text-[#141518] group-hover:text-[#FF4D38] transition-colors border-t border-[#ECE6D8]/60">
                   <span>Explore this vertical with our strategist</span>
-                  <span className="underline underline-offset-4">Talk to strategist &rarr;</span>
+                  <span className="underline underline-offset-4 flex items-center gap-1">
+                    Talk to strategist &rarr;
+                  </span>
                 </div>
 
               </div>

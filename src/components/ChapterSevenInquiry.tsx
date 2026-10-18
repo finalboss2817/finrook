@@ -111,74 +111,74 @@ export const ChapterSevenInquiry: React.FC<ChapterSevenInquiryProps> = ({
   return (
     <section
       id="inquiry"
-      className="py-24 px-6 lg:px-16 bg-[#FAF8F5] border-b border-[#E5DFC0]"
+      className="py-16 sm:py-24 px-4 sm:px-8 lg:px-16 bg-[#FAF8F5] border-b border-[#E5DFC0]"
     >
       <div className="max-w-7xl mx-auto w-full">
         {/* Chapter Header */}
-        <div className="pb-6 border-b border-[#E5DFC0] flex items-center justify-between text-xs tracking-wider uppercase text-[#6E6A61] font-mono">
+        <div className="pb-5 sm:pb-6 border-b border-[#E5DFC0] flex items-center justify-between text-xs tracking-wider uppercase text-[#6E6A61] font-mono">
           <span className="font-semibold text-[#141518]">DIRECT CONTACT</span>
           <span className="text-[#5C5952]">CHAPTER 08 · MAKE YOUR NEXT MOVE</span>
         </div>
 
         {/* Narrative Section Header */}
-        <div className="mt-12 max-w-3xl">
-          <div className="text-xs font-bold uppercase tracking-wider text-[#E1382B] mb-3">
+        <div className="mt-8 sm:mt-12 max-w-3xl">
+          <div className="text-xs font-bold uppercase tracking-wider text-[#E1382B] mb-2.5 sm:mb-3">
             Start The Conversation
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#141518] leading-tight">
+          <h2 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#141518] leading-tight">
             Every great move begins <br />
             <span className="text-[#E1382B]">with a simple conversation.</span>
           </h2>
-          <p className="mt-5 text-base sm:text-lg text-[#5C5952] leading-relaxed font-normal">
+          <p className="mt-4 sm:mt-5 text-sm sm:text-base md:text-lg text-[#5C5952] leading-relaxed font-normal">
             Tell us about your brand, creator roster, upcoming event, or content production needs. You can fill out the form or reach out directly on WhatsApp or call.
           </p>
         </div>
 
         {/* 2-Column Layout: Direct Contact Info & Form */}
-        <div className="mt-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div className="mt-8 sm:mt-12 grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-start">
           {/* Left Column: Direct Phone & WhatsApp Channels */}
           <div className="lg:col-span-5 flex flex-col justify-between">
             <div>
-              <div className="text-xs font-mono uppercase tracking-wider text-[#8C887E] font-bold mb-4">
+              <div className="text-xs font-mono uppercase tracking-wider text-[#8C887E] font-bold mb-3 sm:mb-4">
                 Fastest Response Channels:
               </div>
 
-              <div className="space-y-4">
+              <div className="space-y-3 sm:space-y-4">
                 {/* WhatsApp Primary Card */}
                 <a
                   href={`https://wa.me/919920300750?text=${whatsappMessage}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between p-5 bg-[#FFFFFF] border border-[#25D366]/40 hover:border-[#25D366] rounded-xl transition-all shadow-2xs group cursor-pointer"
+                  className="flex items-center justify-between p-4 sm:p-5 bg-[#FFFFFF] border border-[#25D366]/40 hover:border-[#25D366] rounded-xl transition-all shadow-2xs group cursor-pointer"
                 >
-                  <div className="flex items-center gap-3.5">
-                    <div className="p-3 bg-[#25D366]/15 text-[#128C7E] rounded-lg">
-                      <MessageCircle className="w-6 h-6 text-[#25D366]" />
+                  <div className="flex items-center gap-3 sm:gap-3.5">
+                    <div className="p-2.5 sm:p-3 bg-[#25D366]/15 text-[#128C7E] rounded-lg shrink-0">
+                      <MessageCircle className="w-5 sm:w-6 h-5 sm:h-6 text-[#25D366]" />
                     </div>
                     <div>
                       <div className="text-sm font-bold text-[#141518] group-hover:text-[#128C7E] transition-colors">
                         WhatsApp Consultation
                       </div>
-                      <div className="text-xs text-[#6E6A61] mt-0.5">
+                      <div className="text-[11px] sm:text-xs text-[#6E6A61] mt-0.5">
                         Direct chat for project briefs and quick questions
                       </div>
                     </div>
                   </div>
-                  <span className="text-xs font-bold text-[#128C7E] bg-[#25D366]/10 px-3 py-1.5 rounded-full flex items-center gap-1 group-hover:bg-[#25D366]/20 transition-colors">
+                  <span className="text-xs font-bold text-[#128C7E] bg-[#25D366]/10 px-2.5 sm:px-3 py-1.5 rounded-full flex items-center gap-1 group-hover:bg-[#25D366]/20 transition-colors shrink-0 ml-2">
                     <span>Chat</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </span>
                 </a>
 
                 {/* Direct Phone Call Card with Masking & Reveal */}
-                <div className="p-5 bg-[#FFFFFF] border border-[#E5DFC0] rounded-xl transition-all shadow-2xs">
-                  <div className="flex items-center justify-between gap-3">
-                    <div className="flex items-center gap-3.5">
-                      <div className="p-3 bg-[#FFF1F0] text-[#E1382B] rounded-lg">
-                        <Phone className="w-6 h-6" />
+                <div className="p-4 sm:p-5 bg-[#FFFFFF] border border-[#E5DFC0] rounded-xl transition-all shadow-2xs">
+                  <div className="flex flex-col xs:flex-row xs:items-center justify-between gap-3">
+                    <div className="flex items-center gap-3 sm:gap-3.5">
+                      <div className="p-2.5 sm:p-3 bg-[#FFF1F0] text-[#E1382B] rounded-lg shrink-0">
+                        <Phone className="w-5 sm:w-6 h-5 sm:h-6" />
                       </div>
                       <div>
-                        <div className="text-xs font-mono uppercase tracking-wider text-[#8C887E] font-semibold">
+                        <div className="text-[10px] sm:text-xs font-mono uppercase tracking-wider text-[#8C887E] font-semibold">
                           Direct Line
                         </div>
                         <div className="text-sm font-bold text-[#141518] flex items-center gap-2 mt-0.5">
@@ -189,17 +189,17 @@ export const ChapterSevenInquiry: React.FC<ChapterSevenInquiryProps> = ({
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 self-end xs:self-auto">
                       <button
                         type="button"
                         onClick={() => setShowPhone(!showPhone)}
-                        className="p-2 text-xs text-[#6E6A61] hover:text-[#141518] hover:bg-[#FAF8F5] border border-[#E5DFC0] rounded-lg flex items-center gap-1.5 transition-colors cursor-pointer"
+                        className="px-2.5 py-1.5 text-xs text-[#6E6A61] hover:text-[#141518] hover:bg-[#FAF8F5] border border-[#E5DFC0] rounded-lg flex items-center gap-1.5 transition-colors cursor-pointer"
                         title={showPhone ? 'Mask number' : 'Reveal full number'}
                       >
                         {showPhone ? (
                           <>
                             <EyeOff className="w-3.5 h-3.5" />
-                            <span className="hidden sm:inline">Mask</span>
+                            <span>Mask</span>
                           </>
                         ) : (
                           <>
@@ -211,7 +211,7 @@ export const ChapterSevenInquiry: React.FC<ChapterSevenInquiryProps> = ({
 
                       <a
                         href="tel:+919920300750"
-                        className="px-3 py-2 bg-[#E1382B] hover:bg-[#C92F23] text-white text-xs font-bold rounded-lg transition-colors flex items-center gap-1 shadow-2xs"
+                        className="px-3 py-1.5 bg-[#E1382B] hover:bg-[#C92F23] text-white text-xs font-bold rounded-lg transition-colors flex items-center gap-1 shadow-2xs"
                       >
                         <span>Call</span>
                       </a>
@@ -222,42 +222,45 @@ export const ChapterSevenInquiry: React.FC<ChapterSevenInquiryProps> = ({
                 {/* Direct Email Card */}
                 <a
                   href="mailto:hello@finrook.com"
-                  className="flex items-center justify-between p-5 bg-[#FFFFFF] border border-[#E5DFC0] hover:border-[#E1382B] rounded-xl transition-all shadow-2xs group cursor-pointer"
+                  className="flex items-center justify-between p-4 sm:p-5 bg-[#FFFFFF] border border-[#E5DFC0] hover:border-[#E1382B] rounded-xl transition-all shadow-2xs group cursor-pointer"
                 >
-                  <div className="flex items-center gap-3.5">
-                    <div className="p-3 bg-[#FAF8F5] text-[#141518] rounded-lg border border-[#E5DFC0]">
-                      <Mail className="w-6 h-6" />
+                  <div className="flex items-center gap-3 sm:gap-3.5">
+                    <div className="p-2.5 sm:p-3 bg-[#FAF8F5] text-[#141518] rounded-lg border border-[#E5DFC0] shrink-0">
+                      <Mail className="w-5 sm:w-6 h-5 sm:h-6" />
                     </div>
                     <div>
                       <div className="text-sm font-bold text-[#141518] group-hover:text-[#E1382B] transition-colors">
                         hello@finrook.com
                       </div>
-                      <div className="text-xs text-[#6E6A61] mt-0.5">
+                      <div className="text-[11px] sm:text-xs text-[#6E6A61] mt-0.5">
                         Direct inbox for written decks and formal RFPs
                       </div>
                     </div>
                   </div>
-                  <ArrowRight className="w-4 h-4 text-[#8C887E] group-hover:text-[#141518] transition-colors" />
+                  <ArrowRight className="w-4 h-4 text-[#8C887E] group-hover:text-[#141518] transition-colors shrink-0 ml-2" />
                 </a>
               </div>
             </div>
 
             {/* Brand Card */}
-            <div className="mt-8 p-6 bg-[#FFFFFF] border border-[#E5DFC0] rounded-xl flex items-center gap-4 shadow-2xs">
-              <FinrookLogo size={42} />
+            <div className="mt-6 sm:mt-8 p-4 sm:p-6 bg-[#FFFFFF] border border-[#E5DFC0] rounded-xl flex items-center gap-3.5 sm:gap-4 shadow-2xs">
+              <FinrookLogo size={38} />
               <div>
-                <div className="font-bold text-base text-[#141518]">
+                <div className="font-bold text-sm sm:text-base text-[#141518]">
                   Finrook
                 </div>
                 <div className="text-xs text-[#6E6A61]">
                   Your next move backed by the rook.
+                </div>
+                <div className="text-[11px] font-semibold text-[#E1382B] mt-1">
+                  Mumbai • Dubai, UAE • Manila, Philippines
                 </div>
               </div>
             </div>
           </div>
 
           {/* Right Column: Functional Form */}
-          <div className="lg:col-span-7 bg-[#FFFFFF] border border-[#E5DFC0] rounded-2xl p-7 sm:p-10 shadow-sm">
+          <div className="lg:col-span-7 bg-[#FFFFFF] border border-[#E5DFC0] rounded-2xl p-5 sm:p-8 lg:p-10 shadow-sm w-full">
             {submitted ? (
               <div className="py-6 flex flex-col justify-center">
                 <div className="w-12 h-12 bg-[#E1382B] text-white rounded-xl flex items-center justify-center mb-5 shadow-xs">

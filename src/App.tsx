@@ -11,6 +11,7 @@ import { ChapterSixPrinciples } from './components/ChapterSixPrinciples';
 import { ChapterSevenInquiry } from './components/ChapterSevenInquiry';
 import { Footer } from './components/Footer';
 import { TalkToStrategistModal } from './components/TalkToStrategistModal';
+import { CustomCursor } from './components/CustomCursor';
 
 export const App: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -32,6 +33,9 @@ export const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#FAF8F5] text-[#141518] selection:bg-[#FF4D38] selection:text-white flex flex-col antialiased">
+      {/* Elevated Custom Cursor for Desktop */}
+      <CustomCursor />
+
       {/* Chakli-Style Header & Navigation */}
       <Navigation
         onOpenModal={handleOpenModal}

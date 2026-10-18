@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Send, CheckCircle2, Copy, Check, Mail, Phone, MessageCircle, ArrowRight } from 'lucide-react';
+import { Send, CheckCircle2, Copy, Check, Mail, Phone, MessageCircle, ArrowRight, Eye, EyeOff } from 'lucide-react';
 import { FinrookLogo } from './FinrookLogo';
 
 interface ChapterSevenInquiryProps {
@@ -24,6 +24,7 @@ export const ChapterSevenInquiry: React.FC<ChapterSevenInquiryProps> = ({
   const [submitted, setSubmitted] = useState(false);
   const [copied, setCopied] = useState(false);
   const [enquiryRef, setEnquiryRef] = useState('');
+  const [showPhone, setShowPhone] = useState(false);
 
   useEffect(() => {
     if (initialService) {
@@ -58,10 +59,13 @@ export const ChapterSevenInquiry: React.FC<ChapterSevenInquiryProps> = ({
     if (!formData.email.trim()) {
       errs.email = 'Please provide your email address.';
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      errs.email = 'Please enter a valid email address.';
+      errs.email = 'Please provide a valid email address.';
+    }
+    if (!formData.phone.trim()) {
+      errs.phone = 'Please provide your contact phone or WhatsApp number.';
     }
     if (!formData.description.trim()) {
-      errs.description = 'Please tell us what you have in mind.';
+      errs.description = 'Please tell us briefly what you want to achieve.';
     }
     setErrors(errs);
     return Object.keys(errs).length === 0;
@@ -72,153 +76,180 @@ export const ChapterSevenInquiry: React.FC<ChapterSevenInquiryProps> = ({
     if (!validate()) return;
 
     setSubmitting(true);
-    const generatedRef = `ROOK-${Math.floor(100000 + Math.random() * 900000)}`;
 
     setTimeout(() => {
+      const generatedRef = `FRK-${Math.floor(100000 + Math.random() * 900000)}`;
+      setEnquiryRef(generatedRef);
       setSubmitting(false);
       setSubmitted(true);
-      setEnquiryRef(generatedRef);
 
       try {
         const stored = JSON.parse(localStorage.getItem('finrook_inquiries') || '[]');
         stored.push({
           ref: generatedRef,
           ...formData,
-          date: new Date().toISOString(),
+          submittedAt: new Date().toISOString(),
         });
         localStorage.setItem('finrook_inquiries', JSON.stringify(stored));
-      } catch {
-        // storage fallback
+      } catch (err) {
+        console.error('Failed to cache inquiry locally:', err);
       }
-    }, 400);
+    }, 600);
   };
 
   const handleCopySummary = () => {
-    const summary = `FINROOK INQUIRY [${enquiryRef}]\nName: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone || 'N/A'}\nService: ${formData.service}\n\nBrief:\n${formData.description}`;
+    const summary = `FINROOK INQUIRY [#${enquiryRef}]\nName: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone}\nService: ${formData.service}\nDetails: ${formData.description}`;
     navigator.clipboard.writeText(summary);
     setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
-  const handleReset = () => {
-    setSubmitted(false);
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      service: 'Brand Management',
-      description: '',
-    });
-    setErrors({});
+    setTimeout(() => setCopied(false), 2500);
   };
 
   const whatsappMessage = encodeURIComponent(
-    `Hello Finrook! My name is ${formData.name || 'there'}. I want to inquire about ${formData.service}: ${formData.description || 'reaching out from your website'}`
+    `Hi Finrook team, I want to discuss a project:\nName: ${formData.name || 'Not provided'}\nService: ${formData.service}\nDetails: ${formData.description || 'General inquiry'}`
   );
 
   return (
     <section
       id="inquiry"
-      className="py-24 px-6 lg:px-16 bg-[#0A0A0A] border-b border-[#1E1E1E]"
+      className="py-24 px-6 lg:px-16 bg-[#FAF8F5] border-b border-[#E5DFC0]"
     >
       <div className="max-w-7xl mx-auto w-full">
         {/* Chapter Header */}
-        <div className="pb-8 border-b border-[#1E1E1E] flex items-center justify-between text-xs tracking-wider uppercase text-[#71717A] font-mono">
-          <span>THE ACTION STEP</span>
-          <span>CHAPTER 07 · YOUR NEXT MOVE</span>
+        <div className="pb-6 border-b border-[#E5DFC0] flex items-center justify-between text-xs tracking-wider uppercase text-[#6E6A61] font-mono">
+          <span className="font-semibold text-[#141518]">DIRECT CONTACT</span>
+          <span className="text-[#5C5952]">CHAPTER 08 · MAKE YOUR NEXT MOVE</span>
         </div>
 
-        <div className="mt-12 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
-          {/* Left Column: Direct Invitation & Channels */}
+        {/* Narrative Section Header */}
+        <div className="mt-12 max-w-3xl">
+          <div className="text-xs font-bold uppercase tracking-wider text-[#E1382B] mb-3">
+            Start The Conversation
+          </div>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#141518] leading-tight">
+            Every great move begins <br />
+            <span className="text-[#E1382B]">with a simple conversation.</span>
+          </h2>
+          <p className="mt-5 text-base sm:text-lg text-[#5C5952] leading-relaxed font-normal">
+            Tell us about your brand, creator roster, upcoming event, or content production needs. You can fill out the form or reach out directly on WhatsApp or call.
+          </p>
+        </div>
+
+        {/* 2-Column Layout: Direct Contact Info & Form */}
+        <div className="mt-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          {/* Left Column: Direct Phone & WhatsApp Channels */}
           <div className="lg:col-span-5 flex flex-col justify-between">
             <div>
-              <div className="text-xs font-semibold uppercase tracking-wider text-[#FF2B06] mb-3">
-                Let&apos;s Connect
+              <div className="text-xs font-mono uppercase tracking-wider text-[#8C887E] font-bold mb-4">
+                Fastest Response Channels:
               </div>
 
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-tight">
-                We&apos;ve explored the possibilities. <br />
-                <span className="text-[#FF2B06]">What&apos;s your next move?</span>
-              </h2>
-
-              <p className="mt-6 text-base text-[#A1A1AA] leading-relaxed font-normal">
-                Whether you want to build a brand, explore creator partnerships, organize an event, or produce content that connects with people—let&apos;s talk about what you have in mind.
-              </p>
-
-              {/* Direct Channels */}
-              <div className="mt-8 space-y-3">
+              <div className="space-y-4">
+                {/* WhatsApp Primary Card */}
                 <a
                   href={`https://wa.me/919920300750?text=${whatsappMessage}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between p-4 bg-[#141414] border border-[#222222] hover:border-[#333333] rounded-lg transition-colors group cursor-pointer"
+                  className="flex items-center justify-between p-5 bg-[#FFFFFF] border border-[#25D366]/40 hover:border-[#25D366] rounded-xl transition-all shadow-2xs group cursor-pointer"
                 >
-                  <div className="flex items-center gap-3">
-                    <div className="p-2 bg-[#25D366]/20 text-[#25D366] rounded-md">
-                      <MessageCircle className="w-5 h-5" />
+                  <div className="flex items-center gap-3.5">
+                    <div className="p-3 bg-[#25D366]/15 text-[#128C7E] rounded-lg">
+                      <MessageCircle className="w-6 h-6 text-[#25D366]" />
                     </div>
                     <div>
-                      <div className="text-sm font-semibold text-white group-hover:text-[#FF2B06] transition-colors">
-                        WhatsApp: +91 99203 00750
+                      <div className="text-sm font-bold text-[#141518] group-hover:text-[#128C7E] transition-colors">
+                        WhatsApp Consultation
                       </div>
-                      <div className="text-xs text-[#71717A]">
-                        Fastest response for urgent inquiries & briefs
+                      <div className="text-xs text-[#6E6A61] mt-0.5">
+                        Direct chat for project briefs and quick questions
                       </div>
                     </div>
                   </div>
-                  <ArrowRight className="w-4 h-4 text-[#71717A] group-hover:text-white transition-colors" />
+                  <span className="text-xs font-bold text-[#128C7E] bg-[#25D366]/10 px-3 py-1.5 rounded-full flex items-center gap-1 group-hover:bg-[#25D366]/20 transition-colors">
+                    <span>Chat</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </span>
                 </a>
 
-                <a
-                  href="tel:+919920300750"
-                  className="flex items-center justify-between p-4 bg-[#141414] border border-[#222222] hover:border-[#333333] rounded-lg transition-colors group cursor-pointer"
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="p-2 bg-[#FF2B06]/20 text-[#FF2B06] rounded-md">
-                      <Phone className="w-5 h-5" />
+                {/* Direct Phone Call Card with Masking & Reveal */}
+                <div className="p-5 bg-[#FFFFFF] border border-[#E5DFC0] rounded-xl transition-all shadow-2xs">
+                  <div className="flex items-center justify-between gap-3">
+                    <div className="flex items-center gap-3.5">
+                      <div className="p-3 bg-[#FFF1F0] text-[#E1382B] rounded-lg">
+                        <Phone className="w-6 h-6" />
+                      </div>
+                      <div>
+                        <div className="text-xs font-mono uppercase tracking-wider text-[#8C887E] font-semibold">
+                          Direct Line
+                        </div>
+                        <div className="text-sm font-bold text-[#141518] flex items-center gap-2 mt-0.5">
+                          <span className="tracking-wider">
+                            {showPhone ? '+91 99203 00750' : '+91 99203 •••••'}
+                          </span>
+                        </div>
+                      </div>
                     </div>
-                    <div>
-                      <div className="text-sm font-semibold text-white group-hover:text-[#FF2B06] transition-colors">
-                        Call: +91 99203 00750
-                      </div>
-                      <div className="text-xs text-[#71717A]">
-                        Direct line to our coordination team
-                      </div>
+
+                    <div className="flex items-center gap-2">
+                      <button
+                        type="button"
+                        onClick={() => setShowPhone(!showPhone)}
+                        className="p-2 text-xs text-[#6E6A61] hover:text-[#141518] hover:bg-[#FAF8F5] border border-[#E5DFC0] rounded-lg flex items-center gap-1.5 transition-colors cursor-pointer"
+                        title={showPhone ? 'Mask number' : 'Reveal full number'}
+                      >
+                        {showPhone ? (
+                          <>
+                            <EyeOff className="w-3.5 h-3.5" />
+                            <span className="hidden sm:inline">Mask</span>
+                          </>
+                        ) : (
+                          <>
+                            <Eye className="w-3.5 h-3.5 text-[#E1382B]" />
+                            <span className="font-semibold text-[#E1382B]">Reveal</span>
+                          </>
+                        )}
+                      </button>
+
+                      <a
+                        href="tel:+919920300750"
+                        className="px-3 py-2 bg-[#E1382B] hover:bg-[#C92F23] text-white text-xs font-bold rounded-lg transition-colors flex items-center gap-1 shadow-2xs"
+                      >
+                        <span>Call</span>
+                      </a>
                     </div>
                   </div>
-                  <ArrowRight className="w-4 h-4 text-[#71717A] group-hover:text-white transition-colors" />
-                </a>
+                </div>
 
+                {/* Direct Email Card */}
                 <a
                   href="mailto:hello@finrook.com"
-                  className="flex items-center justify-between p-4 bg-[#141414] border border-[#222222] hover:border-[#333333] rounded-lg transition-colors group cursor-pointer"
+                  className="flex items-center justify-between p-5 bg-[#FFFFFF] border border-[#E5DFC0] hover:border-[#E1382B] rounded-xl transition-all shadow-2xs group cursor-pointer"
                 >
-                  <div className="flex items-center gap-3">
-                    <div className="p-2 bg-[#FF2B06]/20 text-[#FF2B06] rounded-md">
-                      <Mail className="w-5 h-5" />
+                  <div className="flex items-center gap-3.5">
+                    <div className="p-3 bg-[#FAF8F5] text-[#141518] rounded-lg border border-[#E5DFC0]">
+                      <Mail className="w-6 h-6" />
                     </div>
                     <div>
-                      <div className="text-sm font-semibold text-white group-hover:text-[#FF2B06] transition-colors">
+                      <div className="text-sm font-bold text-[#141518] group-hover:text-[#E1382B] transition-colors">
                         hello@finrook.com
                       </div>
-                      <div className="text-xs text-[#71717A]">
-                        Direct inbox for written proposals
+                      <div className="text-xs text-[#6E6A61] mt-0.5">
+                        Direct inbox for written decks and formal RFPs
                       </div>
                     </div>
                   </div>
-                  <ArrowRight className="w-4 h-4 text-[#71717A] group-hover:text-white transition-colors" />
+                  <ArrowRight className="w-4 h-4 text-[#8C887E] group-hover:text-[#141518] transition-colors" />
                 </a>
               </div>
             </div>
 
             {/* Brand Card */}
-            <div className="mt-10 p-5 bg-[#141414] border border-[#222222] rounded-lg flex items-center gap-4">
-              <FinrookLogo size={40} />
+            <div className="mt-8 p-6 bg-[#FFFFFF] border border-[#E5DFC0] rounded-xl flex items-center gap-4 shadow-2xs">
+              <FinrookLogo size={42} />
               <div>
-                <div className="font-bold text-base text-white tracking-wide">
+                <div className="font-bold text-base text-[#141518]">
                   Finrook
                 </div>
-                <div className="text-xs text-[#71717A]">
+                <div className="text-xs text-[#6E6A61]">
                   Your next move backed by the rook.
                 </div>
               </div>
@@ -226,229 +257,200 @@ export const ChapterSevenInquiry: React.FC<ChapterSevenInquiryProps> = ({
           </div>
 
           {/* Right Column: Functional Form */}
-          <div className="lg:col-span-7 bg-[#141414] border border-[#222222] rounded-lg p-7 sm:p-9 shadow-md">
+          <div className="lg:col-span-7 bg-[#FFFFFF] border border-[#E5DFC0] rounded-2xl p-7 sm:p-10 shadow-sm">
             {submitted ? (
-              <div className="py-8 flex flex-col justify-center">
-                <div className="w-12 h-12 bg-[#FF2B06] text-white rounded-md flex items-center justify-center mb-5">
+              <div className="py-6 flex flex-col justify-center">
+                <div className="w-12 h-12 bg-[#E1382B] text-white rounded-xl flex items-center justify-center mb-5 shadow-xs">
                   <CheckCircle2 className="w-6 h-6" />
                 </div>
 
-                <div className="text-xs font-mono uppercase tracking-wider text-[#FF2B06] font-semibold">
-                  Inquiry Logged · Ref #{enquiryRef}
+                <div className="text-xs font-mono uppercase tracking-wider text-[#E1382B] font-bold">
+                  Inquiry Received · Ref #{enquiryRef}
                 </div>
 
-                <h3 className="text-2xl sm:text-3xl font-bold text-white mt-2">
+                <h3 className="text-2xl sm:text-3xl font-extrabold text-[#141518] mt-2">
                   Thank you, {formData.name}.
                 </h3>
 
-                <p className="mt-3 text-sm text-[#A1A1AA] leading-relaxed font-normal">
-                  We received your brief for <span className="font-semibold text-white">{formData.service}</span>. A team member will review your requirement and follow up with <span className="font-semibold text-white">{formData.email}</span> within 24 business hours.
+                <p className="mt-3 text-sm text-[#5C5952] leading-relaxed">
+                  We received your inquiry regarding <span className="font-bold text-[#141518]">{formData.service}</span>. Our team will review your requirements and reach out to you at <span className="font-bold text-[#141518]">{formData.phone || formData.email}</span> within 24 business hours.
                 </p>
 
-                <div className="mt-6 p-4 bg-[#181818] rounded-md border border-[#27272A] text-xs font-mono text-[#D4D4D8] space-y-1.5">
+                <div className="mt-6 p-4 bg-[#FAF8F5] rounded-xl border border-[#E5DFC0] text-xs font-mono text-[#4A4843] space-y-1.5">
                   <div>Reference: #{enquiryRef}</div>
                   <div>Service: {formData.service}</div>
-                  <div className="truncate">Notes: {formData.description}</div>
+                  <div>Contact: {formData.phone || formData.email}</div>
                 </div>
 
-                <div className="mt-8 flex flex-wrap items-center gap-4">
+                <div className="mt-6 flex flex-wrap gap-3">
                   <button
                     type="button"
                     onClick={handleCopySummary}
-                    className="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-semibold uppercase tracking-wider text-white bg-[#222222] hover:bg-[#2A2A2A] rounded-md transition-colors cursor-pointer"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#FAF8F5] hover:bg-[#F2EDE4] border border-[#E5DFC0] text-xs font-semibold text-[#141518] rounded-lg transition-colors cursor-pointer"
                   >
-                    {copied ? <Check className="w-4 h-4 text-[#FF2B06]" /> : <Copy className="w-4 h-4" />}
-                    <span>{copied ? 'Copied' : 'Copy Brief Summary'}</span>
+                    {copied ? (
+                      <>
+                        <Check className="w-3.5 h-3.5 text-[#25D366]" />
+                        <span>Summary Copied</span>
+                      </>
+                    ) : (
+                      <>
+                        <Copy className="w-3.5 h-3.5" />
+                        <span>Copy Summary</span>
+                      </>
+                    )}
                   </button>
 
                   <a
-                    href={`mailto:hello@finrook.com?subject=Finrook Inquiry Ref ${enquiryRef}&body=${encodeURIComponent(
-                      `Hello Finrook,\n\nFollowing up on inquiry #${enquiryRef}.\nName: ${formData.name}\nService: ${formData.service}\n\nNotes:\n${formData.description}`
-                    )}`}
-                    className="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-semibold uppercase tracking-wider text-white bg-[#FF2B06] hover:bg-[#E62400] rounded-md transition-colors cursor-pointer"
+                    href={`https://wa.me/919920300750?text=${whatsappMessage}%20(Ref:%20${enquiryRef})`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#25D366] hover:bg-[#1ebd59] text-white text-xs font-bold rounded-lg shadow-xs transition-colors cursor-pointer"
                   >
-                    <span>Open Email Backup</span>
-                    <ArrowRight className="w-4 h-4" />
+                    <MessageCircle className="w-3.5 h-3.5" />
+                    <span>Send on WhatsApp</span>
                   </a>
 
                   <button
                     type="button"
-                    onClick={handleReset}
-                    className="text-xs text-[#71717A] hover:text-white underline underline-offset-4 ml-auto cursor-pointer"
+                    onClick={() => {
+                      setSubmitted(false);
+                      setFormData({
+                        name: '',
+                        email: '',
+                        phone: '',
+                        service: 'Brand Management',
+                        description: '',
+                      });
+                    }}
+                    className="px-4 py-2.5 text-xs text-[#8C887E] hover:text-[#141518] transition-colors cursor-pointer"
                   >
-                    Submit another inquiry
+                    Submit another brief
                   </button>
                 </div>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} noValidate>
-                <div className="border-b border-[#222222] pb-4 mb-6">
-                  <h3 className="text-2xl font-bold text-white">
-                    Tell Us What You Need
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div>
+                  <h3 className="text-2xl font-bold text-[#141518]">
+                    Send a Project Brief
                   </h3>
-                  <p className="text-xs text-[#71717A] mt-1 font-normal">
-                    We keep it simple. Fill out your details below and we&apos;ll get in touch.
+                  <p className="mt-1 text-xs text-[#6E6A61]">
+                    No obligation. We reply with clear next steps and timeline.
                   </p>
                 </div>
 
-                <div className="space-y-5">
-                  {/* Name */}
+                {/* Name */}
+                <div>
+                  <label htmlFor="inquiry-name" className="block text-xs font-mono uppercase tracking-wider text-[#141518] font-bold mb-2">
+                    Your Name or Organization *
+                  </label>
+                  <input
+                    id="inquiry-name"
+                    type="text"
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    placeholder="e.g. Rahul Sharma / Apex Athletics"
+                    className="w-full px-4 py-3 bg-[#FAF8F5] border border-[#E5DFC0] rounded-lg text-sm text-[#141518] placeholder-[#9E9A90] focus:outline-none focus:border-[#E1382B] focus:bg-[#FFFFFF] transition-colors"
+                  />
+                  {errors.name && (
+                    <p className="mt-1.5 text-xs text-[#E1382B]">{errors.name}</p>
+                  )}
+                </div>
+
+                {/* Email and Phone */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label
-                      htmlFor="name"
-                      className="block text-xs font-medium uppercase tracking-wider text-[#A1A1AA] mb-2"
-                    >
-                      Your Name or Organization *
+                    <label htmlFor="inquiry-email" className="block text-xs font-mono uppercase tracking-wider text-[#141518] font-bold mb-2">
+                      Email Address *
                     </label>
                     <input
-                      type="text"
-                      id="name"
-                      value={formData.name}
-                      onChange={(e) => {
-                        setFormData({ ...formData, name: e.target.value });
-                        if (errors.name) setErrors({ ...errors, name: '' });
-                      }}
-                      placeholder="e.g. Alex Morgan / Horizon Media"
-                      className={`w-full px-4 py-3 bg-[#181818] border rounded-md text-sm text-white focus:outline-hidden transition-colors ${
-                        errors.name
-                          ? 'border-red-500'
-                          : 'border-[#27272A] focus:border-[#FF2B06]'
-                      }`}
+                      id="inquiry-email"
+                      type="email"
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      placeholder="name@example.com"
+                      className="w-full px-4 py-3 bg-[#FAF8F5] border border-[#E5DFC0] rounded-lg text-sm text-[#141518] placeholder-[#9E9A90] focus:outline-none focus:border-[#E1382B] focus:bg-[#FFFFFF] transition-colors"
                     />
-                    {errors.name && (
-                      <p className="mt-1 text-xs text-red-500">{errors.name}</p>
+                    {errors.email && (
+                      <p className="mt-1.5 text-xs text-[#E1382B]">{errors.email}</p>
                     )}
                   </div>
 
-                  {/* Email & Phone */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label
-                        htmlFor="email"
-                        className="block text-xs font-medium uppercase tracking-wider text-[#A1A1AA] mb-2"
-                      >
-                        Email Address *
-                      </label>
-                      <input
-                        type="email"
-                        id="email"
-                        value={formData.email}
-                        onChange={(e) => {
-                          setFormData({ ...formData, email: e.target.value });
-                          if (errors.email) setErrors({ ...errors, email: '' });
-                        }}
-                        placeholder="alex@example.com"
-                        className={`w-full px-4 py-3 bg-[#181818] border rounded-md text-sm text-white focus:outline-hidden transition-colors ${
-                          errors.email
-                            ? 'border-red-500'
-                            : 'border-[#27272A] focus:border-[#FF2B06]'
-                        }`}
-                      />
-                      {errors.email && (
-                        <p className="mt-1 text-xs text-red-500">{errors.email}</p>
-                      )}
-                    </div>
-
-                    <div>
-                      <label
-                        htmlFor="phone"
-                        className="block text-xs font-medium uppercase tracking-wider text-[#A1A1AA] mb-2"
-                      >
-                        Phone Number <span className="text-[#71717A]">(Optional)</span>
-                      </label>
-                      <input
-                        type="tel"
-                        id="phone"
-                        value={formData.phone}
-                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        placeholder="+1 (555) 000-0000"
-                        className="w-full px-4 py-3 bg-[#181818] border border-[#27272A] rounded-md text-sm text-white focus:border-[#FF2B06] focus:outline-hidden transition-colors"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Service Selection */}
                   <div>
-                    <label className="block text-xs font-medium uppercase tracking-wider text-[#A1A1AA] mb-2">
-                      Service Required *
+                    <label htmlFor="inquiry-phone" className="block text-xs font-mono uppercase tracking-wider text-[#141518] font-bold mb-2">
+                      Phone / WhatsApp *
                     </label>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                      {serviceOptions.map((opt) => {
-                        const isChecked = formData.service === opt;
-                        return (
-                          <label
-                            key={opt}
-                            className={`flex items-center gap-3 p-3 rounded-md border cursor-pointer text-xs transition-colors ${
-                              isChecked
-                                ? 'bg-[#222222] border-[#FF2B06] text-white font-medium'
-                                : 'bg-[#181818] border-[#27272A] text-[#A1A1AA] hover:border-[#383838]'
-                            }`}
-                          >
-                            <input
-                              type="radio"
-                              name="service"
-                              value={opt}
-                              checked={isChecked}
-                              onChange={() => setFormData({ ...formData, service: opt })}
-                              className="text-[#FF2B06] focus:ring-[#FF2B06]"
-                            />
-                            <span>{opt}</span>
-                          </label>
-                        );
-                      })}
-                    </div>
-                  </div>
-
-                  {/* Description */}
-                  <div>
-                    <label
-                      htmlFor="description"
-                      className="block text-xs font-medium uppercase tracking-wider text-[#A1A1AA] mb-2"
-                    >
-                      Short Description of Your Requirement *
-                    </label>
-                    <textarea
-                      id="description"
-                      rows={4}
-                      value={formData.description}
-                      onChange={(e) => {
-                        setFormData({ ...formData, description: e.target.value });
-                        if (errors.description) setErrors({ ...errors, description: '' });
-                      }}
-                      placeholder="Tell us what you want to achieve, any target dates, budget context, or key questions..."
-                      className={`w-full px-4 py-3 bg-[#181818] border rounded-md text-sm text-white focus:outline-hidden transition-colors ${
-                        errors.description
-                          ? 'border-red-500'
-                          : 'border-[#27272A] focus:border-[#FF2B06]'
-                      }`}
+                    <input
+                      id="inquiry-phone"
+                      type="tel"
+                      value={formData.phone}
+                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                      placeholder="+91 99203 00750"
+                      className="w-full px-4 py-3 bg-[#FAF8F5] border border-[#E5DFC0] rounded-lg text-sm text-[#141518] placeholder-[#9E9A90] focus:outline-none focus:border-[#E1382B] focus:bg-[#FFFFFF] transition-colors"
                     />
-                    {errors.description && (
-                      <p className="mt-1 text-xs text-red-500">{errors.description}</p>
+                    {errors.phone && (
+                      <p className="mt-1.5 text-xs text-[#E1382B]">{errors.phone}</p>
                     )}
-                  </div>
-
-                  {/* Submit Button */}
-                  <div className="pt-4 border-t border-[#222222] flex flex-col sm:flex-row items-center justify-between gap-4">
-                    <span className="text-xs text-[#71717A]">
-                      Your information is treated with strict confidentiality.
-                    </span>
-
-                    <button
-                      type="submit"
-                      disabled={submitting}
-                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 text-xs font-semibold uppercase tracking-wider text-white bg-[#FF2B06] hover:bg-[#E62400] transition-colors rounded-md disabled:opacity-60 cursor-pointer shadow-sm"
-                    >
-                      {submitting ? (
-                        <span>Submitting...</span>
-                      ) : (
-                        <>
-                          <span>Submit Requirement</span>
-                          <Send className="w-4 h-4" />
-                        </>
-                      )}
-                    </button>
                   </div>
                 </div>
+
+                {/* Service Selection */}
+                <div>
+                  <label htmlFor="inquiry-service" className="block text-xs font-mono uppercase tracking-wider text-[#141518] font-bold mb-2">
+                    Primary Service Needed
+                  </label>
+                  <select
+                    id="inquiry-service"
+                    value={formData.service}
+                    onChange={(e) => setFormData({ ...formData, service: e.target.value })}
+                    className="w-full px-4 py-3 bg-[#FAF8F5] border border-[#E5DFC0] rounded-lg text-sm text-[#141518] focus:outline-none focus:border-[#E1382B] focus:bg-[#FFFFFF] transition-colors cursor-pointer"
+                  >
+                    {serviceOptions.map((opt) => (
+                      <option key={opt} value={opt} className="bg-[#FFFFFF] text-[#141518]">
+                        {opt}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Project Details */}
+                <div>
+                  <label htmlFor="inquiry-desc" className="block text-xs font-mono uppercase tracking-wider text-[#141518] font-bold mb-2">
+                    Tell Us About Your Project *
+                  </label>
+                  <textarea
+                    id="inquiry-desc"
+                    rows={4}
+                    value={formData.description}
+                    onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                    placeholder="What are you building or planning? Tell us about your goals, timelines, or any specific questions you have."
+                    className="w-full px-4 py-3 bg-[#FAF8F5] border border-[#E5DFC0] rounded-lg text-sm text-[#141518] placeholder-[#9E9A90] focus:outline-none focus:border-[#E1382B] focus:bg-[#FFFFFF] transition-colors resize-y"
+                  />
+                  {errors.description && (
+                    <p className="mt-1.5 text-xs text-[#E1382B]">{errors.description}</p>
+                  )}
+                </div>
+
+                {/* Submit button */}
+                <button
+                  type="submit"
+                  disabled={submitting}
+                  className="w-full py-4 bg-[#E1382B] hover:bg-[#C92F23] text-white font-bold text-sm uppercase tracking-wider rounded-lg shadow-sm transition-all cursor-pointer flex items-center justify-center gap-2"
+                >
+                  {submitting ? (
+                    <span>Submitting Brief...</span>
+                  ) : (
+                    <>
+                      <span>Send Project Brief</span>
+                      <Send className="w-4 h-4" />
+                    </>
+                  )}
+                </button>
+
+                <p className="text-center text-xs text-[#8C887E]">
+                  All project briefs are kept confidential. Direct consultations are available via WhatsApp or our coordination line.
+                </p>
               </form>
             )}
           </div>

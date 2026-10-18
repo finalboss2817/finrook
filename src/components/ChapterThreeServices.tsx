@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowRight, ArrowUpRight, Compass, Users, Calendar, Video } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Compass, Users, Calendar, Video, CheckCircle } from 'lucide-react';
 
 interface ChapterThreeServicesProps {
   onSelectService: (serviceName: string) => void;
@@ -8,219 +8,201 @@ interface ChapterThreeServicesProps {
 export const ChapterThreeServices: React.FC<ChapterThreeServicesProps> = ({
   onSelectService,
 }) => {
-  const [activeScene, setActiveScene] = useState<number>(0);
+  const [activeTab, setActiveTab] = useState<number>(0);
 
   const scenes = [
     {
       id: 'brand',
       num: '01',
-      category: 'The Brand',
+      category: 'Brand Management',
       icon: Compass,
-      headline: 'Make your brand recognisable.',
-      copy: 'Your brand is more than a name or a logo. It is how people see your business, understand what you offer, and remember you. Finrook helps manage how your brand looks, communicates, and appears across its platforms.',
+      headline: 'Make your business instantly recognisable.',
+      copy: 'A real brand is much more than a logo. It is the impression you leave in the first five seconds, how your packaging feels, and the reputation that makes customers trust you without hesitation. We build and protect your brand so you always look like the market leader.',
       image: '/src/assets/images/finrook_brand_scene_1792255093449.jpg',
       imageAlt: 'Editorial design studio with typography specimens and brand identity guidelines',
       services: [
-        'Brand identity and positioning',
-        'Brand communication and messaging',
-        'Social media planning and management',
-        'Campaign planning and execution',
-        'Consistent brand presentation',
+        'Brand identity, typography, and color styling',
+        'Packaging design and physical brand assets',
+        'Clear brand voice and marketing messaging',
+        'Social media design templates and governance',
+        'Campaign positioning and visual consistency',
       ],
-      cta: "Let's Build Your Brand",
+      cta: 'Build Your Brand With Us',
       serviceParam: 'Brand Management',
     },
     {
       id: 'creator',
       num: '02',
-      category: 'The Creator',
+      category: 'Creator Management & Deals',
       icon: Users,
-      headline: 'Turn your talent into opportunities.',
-      copy: 'Creators have ideas, skills, and audiences. Brands have products, services, and stories to tell. The right collaboration brings them together. Finrook helps creators explore brand deals and helps businesses find suitable creators for their campaigns.',
+      headline: 'Turn your audience into real revenue.',
+      copy: 'Creators have talent and an engaged following. Brands have marketing budgets and products they want to promote. We act as the bridge: pitching you to top brands, negotiating commercial terms, locking in clear contracts, and making sure you get paid on time.',
       image: '/src/assets/images/finrook_creator_scene_1792255095438.jpg',
       imageAlt: 'Creator studio with cinema camera and storyboard frames',
       services: [
-        'Creator management and representation',
-        'Brand deal sourcing and coordination',
-        'Creator and brand matching',
-        'Sponsored content coordination',
-        'Campaign communication and deliverables',
+        'Dedicated talent representation and management',
+        'Paid sponsorship sourcing and brand negotiations',
+        'Contract review and legal payment protection',
+        'Brand campaign deliverables coordination',
+        'Long-term creator career monetization roadmap',
       ],
-      cta: 'Explore Creator Partnerships',
+      cta: 'Explore Creator Deals',
       serviceParam: 'Creator Management / Brand Deals',
-      disclaimer: 'Transparent partnerships grounded in fit, quality, and mutual alignment.',
+      disclaimer: 'Transparent partnerships. We protect creators from bad deals and unpaid deliverables.',
     },
     {
       id: 'event',
       num: '03',
-      category: 'The Event',
+      category: 'Event Management',
       icon: Calendar,
-      headline: 'From the first plan to the final moment.',
-      copy: 'Some occasions need to bring a company together. Others need to bring a crowd to life. Whatever the occasion, the details matter. Finrook helps plan and coordinate events from the initial idea to on-ground execution.',
+      headline: 'Flawless execution from concept to show day.',
+      copy: 'Whether it is a college cultural fest, an intimate brand launch, a corporate conference, or a massive concert, the secret to a great event is in the details. We handle staging, sound, lighting, artist bookings, crowd flow, and on-ground logistics so you can actually enjoy the event.',
       image: '/src/assets/images/finrook_event_scene_1792255095112.jpg',
-      imageAlt: 'Architectural event hall with stage production and attendees',
+      imageAlt: 'Architectural event hall during an evening celebration with ambient lighting',
       services: [
-        'Corporate events and conferences',
-        'College festivals and student events',
-        'Product launches and brand activations',
-        'Private celebrations and galas',
-        'Exhibitions and networking events',
-        'Venue, vendor, stage, and guest coordination',
+        'College festivals, fests, and campus activations',
+        'Corporate summits, product launches, and gala dinners',
+        'Concerts, artist bookings, and stage design',
+        'Audio, video, lighting, and stage rigging management',
+        'On-ground security, permits, and vendor coordination',
       ],
-      cta: "Let's Plan Your Event",
+      cta: 'Plan Your Next Event',
       serviceParam: 'Event Management',
     },
     {
       id: 'content',
       num: '04',
-      category: 'The Content',
+      category: 'Content Creation & Management',
       icon: Video,
-      headline: 'Give your ideas something to say.',
-      copy: 'Good content helps people understand your brand, discover what you do, and remember why it matters. Finrook helps plan, create, and manage content that gives your communication a clear purpose.',
-      image: '/src/assets/images/finrook_content_scene_1792255095120.jpg',
-      imageAlt: 'Content creation suite with moodboard wall and video timeline editing',
+      headline: 'Videos and creative assets that stop the scroll.',
+      copy: 'Social media moves fast. If your content looks amateur or repeats the same stale format, people keep scrolling. We plan, script, shoot, and edit high-impact videos, photo series, and campaigns designed to keep viewers watching and taking action.',
+      image: '/src/assets/images/finrook_content_scene_1792255094970.jpg',
+      imageAlt: 'Content creation suite with moodboard and video editing monitor',
       services: [
-        'Content planning and strategy',
-        'Reels and short-form videos',
-        'Photography and video production',
-        'Campaign creative and scripting',
-        'Captions and publishing schedules',
-        'Social media content management',
+        'Short-form reels, TikToks, and YouTube Shorts production',
+        'Studio and on-location commercial photography',
+        'Scriptwriting, creative hooks, and storyboarding',
+        'Color grading, motion graphics, and audio mixing',
+        'Monthly content calendars and publishing schedules',
       ],
-      cta: 'Create With Finrook',
+      cta: 'Produce High-Impact Content',
       serviceParam: 'Content Creation / Management',
     },
   ];
 
-  const current = scenes[activeScene];
+  const current = scenes[activeTab];
+  const Icon = current.icon;
 
   return (
     <section
       id="arenas"
-      className="py-24 px-6 lg:px-16 bg-[#0A0A0A] border-b border-[#1E1E1E]"
+      className="py-24 px-6 lg:px-16 bg-[#FAF8F5] border-b border-[#E5DFC0]"
     >
       <div className="max-w-7xl mx-auto w-full">
         {/* Chapter Header */}
-        <div className="pb-8 border-b border-[#1E1E1E] flex items-center justify-between text-xs tracking-wider uppercase text-[#71717A] font-mono">
-          <span>THE FOUR CAPABILITIES</span>
-          <span>CHAPTER 03 · FOUR WAYS TO MAKE THE MOVE</span>
+        <div className="pb-6 border-b border-[#E5DFC0] flex items-center justify-between text-xs tracking-wider uppercase text-[#6E6A61] font-mono">
+          <span className="font-semibold text-[#141518]">FOUR DISCIPLINES</span>
+          <span className="text-[#5C5952]">CHAPTER 04 · WHAT WE DO</span>
         </div>
 
-        {/* Narrative Intro */}
+        {/* Narrative Section Header */}
         <div className="mt-12 max-w-3xl">
-          <div className="text-xs font-semibold uppercase tracking-wider text-[#FF2B06] mb-3">
-            What We Do
+          <div className="text-xs font-bold uppercase tracking-wider text-[#E1382B] mb-3">
+            Integrated Capabilities
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-tight">
-            Four distinct environments. <br />
-            <span className="text-[#FF2B06]">One guided move.</span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#141518] leading-tight">
+            Four disciplines. <br />
+            <span className="text-[#E1382B]">One coordinated standard.</span>
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-[#A1A1AA] leading-relaxed font-normal">
-            Every business and creator faces a different next step. Choose a capability below to explore how Finrook supports your goals.
+          <p className="mt-5 text-base sm:text-lg text-[#5C5952] leading-relaxed font-normal">
+            We don’t treat these as separate silos. When you work with Finrook, your brand, your creators, your events, and your content feed each other to build unstoppable momentum.
           </p>
         </div>
 
-        {/* Scene Navigation Tabs */}
-        <div className="mt-10 border-b border-[#222222] flex overflow-x-auto gap-2 sm:gap-4 pb-px">
+        {/* Discipline Tabs */}
+        <div className="mt-10 flex flex-wrap gap-3 border-b border-[#E5DFC0] pb-4">
           {scenes.map((s, idx) => {
-            const isActive = activeScene === idx;
+            const TabIcon = s.icon;
+            const isSelected = activeTab === idx;
             return (
               <button
                 key={s.id}
                 type="button"
-                onClick={() => setActiveScene(idx)}
-                className={`py-3.5 px-4 sm:px-6 text-left border-b-2 transition-all whitespace-nowrap cursor-pointer rounded-t-md ${
-                  isActive
-                    ? 'border-[#FF2B06] text-white bg-[#141414]'
-                    : 'border-transparent text-[#71717A] hover:text-white hover:bg-[#111111]'
+                onClick={() => setActiveTab(idx)}
+                className={`inline-flex items-center gap-2.5 px-5 py-3 text-sm font-bold rounded-lg transition-all cursor-pointer ${
+                  isSelected
+                    ? 'bg-[#141518] text-white shadow-xs'
+                    : 'bg-[#FFFFFF] text-[#6E6A61] hover:text-[#141518] hover:bg-[#F2EDE4] border border-[#E5DFC0]'
                 }`}
               >
-                <div className="text-[11px] font-mono text-[#71717A]">
-                  SCENE {s.num}
-                </div>
-                <div className="text-base font-semibold mt-0.5">
-                  {s.category}
-                </div>
+                <TabIcon className={`w-4 h-4 ${isSelected ? 'text-[#E1382B]' : 'text-[#8C887E]'}`} />
+                <span>{s.category}</span>
+                <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded ${isSelected ? 'bg-[#2E313D] text-[#E1382B]' : 'bg-[#ECE6D8] text-[#6E6A61]'}`}>
+                  {s.num}
+                </span>
               </button>
             );
           })}
         </div>
 
-        {/* Active Scene Showcase */}
-        <div className="mt-10 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
-          {/* Left Column: Image with natural proportions */}
-          <div className="lg:col-span-6 relative">
-            <div className="relative aspect-[16/10] overflow-hidden rounded-lg bg-[#141414] border border-[#27272A] shadow-md">
-              <img
-                src={current.image}
-                alt={current.imageAlt}
-                referrerPolicy="no-referrer"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent pointer-events-none" />
-
-              <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-xs text-white">
-                <span className="font-mono bg-black/70 px-2.5 py-1 rounded-sm border border-[#333333]">
-                  {current.category}
-                </span>
-                <span className="text-[#A1A1AA]">Finrook Capability</span>
-              </div>
+        {/* Active Discipline Showcase */}
+        <div className="mt-10 bg-[#FFFFFF] rounded-2xl border border-[#E5DFC0] p-6 lg:p-10 shadow-sm grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          {/* Left Column: Visual Asset */}
+          <div className="lg:col-span-6 relative rounded-xl overflow-hidden border border-[#E5DFC0] aspect-[16/10] bg-[#FAF8F5] shadow-xs">
+            <img
+              src={current.image}
+              alt={current.imageAlt}
+              className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+            />
+            <div className="absolute top-4 left-4 bg-[#FFFFFF]/90 backdrop-blur-md px-3.5 py-1.5 rounded-md border border-[#E5DFC0] text-xs font-mono font-bold text-[#141518] flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-[#E1382B]" />
+              <span>DISCIPLINE {current.num}</span>
             </div>
           </div>
 
-          {/* Right Column: Copy and Services */}
+          {/* Right Column: Copy & Deliverables */}
           <div className="lg:col-span-6 flex flex-col justify-center">
-            <div className="text-xs font-mono uppercase tracking-wider text-[#FF2B06] mb-2 font-medium">
-              Scene {current.num} · {current.category}
+            <div className="flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-[#E1382B]">
+              <Icon className="w-4 h-4" />
+              <span>{current.category}</span>
             </div>
 
-            <h3 className="text-2xl sm:text-3xl font-bold text-white leading-snug">
+            <h3 className="text-2xl sm:text-3xl font-extrabold text-[#141518] mt-3 leading-snug">
               {current.headline}
             </h3>
 
-            <p className="mt-4 text-base text-[#A1A1AA] leading-relaxed font-normal">
+            <p className="mt-4 text-sm sm:text-base text-[#5C5952] leading-relaxed">
               {current.copy}
             </p>
 
-            {/* Services List */}
-            <div className="mt-6 pt-6 border-t border-[#1E1E1E]">
-              <div className="text-xs font-mono uppercase tracking-wider text-[#71717A] mb-3">
-                Key Deliverables:
+            <div className="mt-6 pt-6 border-t border-[#ECE6D8]">
+              <div className="text-xs font-mono uppercase tracking-wider text-[#141518] font-bold mb-3">
+                Key Responsibilities Handled:
               </div>
-              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-sm text-[#E4E4E7]">
-                {current.services.map((item) => (
-                  <li key={item} className="flex items-start gap-2">
-                    <span className="text-[#FF2B06] font-bold">›</span>
-                    <span>{item}</span>
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                {current.services.map((srv, i) => (
+                  <li key={i} className="flex items-start gap-2 text-xs sm:text-sm text-[#4A4843]">
+                    <CheckCircle className="w-4 h-4 text-[#E1382B] shrink-0 mt-0.5" />
+                    <span>{srv}</span>
                   </li>
                 ))}
               </ul>
             </div>
 
             {current.disclaimer && (
-              <p className="mt-4 text-xs text-[#71717A] italic">
-                {current.disclaimer}
-              </p>
+              <div className="mt-4 text-xs text-[#8C887E] italic">
+                * {current.disclaimer}
+              </div>
             )}
 
-            {/* Action Buttons */}
-            <div className="mt-8 pt-6 border-t border-[#1E1E1E] flex flex-wrap items-center justify-between gap-4">
+            <div className="mt-8 flex items-center gap-4">
               <button
                 type="button"
                 onClick={() => onSelectService(current.serviceParam)}
-                className="inline-flex items-center gap-2 px-6 py-3 text-xs font-semibold uppercase tracking-wider text-white bg-[#FF2B06] hover:bg-[#E62400] transition-colors rounded-md cursor-pointer shadow-sm"
+                className="inline-flex items-center gap-2.5 px-6 py-3.5 text-xs sm:text-sm font-bold text-white bg-[#E1382B] hover:bg-[#C92F23] transition-colors rounded-lg shadow-xs cursor-pointer uppercase tracking-wider"
               >
                 <span>{current.cta}</span>
                 <ArrowUpRight className="w-4 h-4" />
-              </button>
-
-              <button
-                type="button"
-                onClick={() => setActiveScene((activeScene + 1) % scenes.length)}
-                className="inline-flex items-center gap-2 text-xs font-medium text-[#A1A1AA] hover:text-white transition-colors cursor-pointer py-2"
-              >
-                <span>Next: {scenes[(activeScene + 1) % scenes.length].category}</span>
-                <ArrowRight className="w-3.5 h-3.5" />
               </button>
             </div>
           </div>

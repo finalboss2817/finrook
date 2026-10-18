@@ -47,25 +47,25 @@ export const CinematicRook: React.FC<CinematicRookProps> = ({
     const rookGroup = new THREE.Group();
     scene.add(rookGroup);
 
-    // Exact Finrook Brand Materials: Matte Scarlet Red & Deep Black
+    // Refined Lighter Red Material & Slate Accent
     const redMat = new THREE.MeshPhysicalMaterial({
-      color: 0xFF2B06,
-      roughness: 0.25,
-      metalness: 0.1,
-      clearcoat: 0.6,
-      clearcoatRoughness: 0.1,
+      color: 0xFF4D38,
+      roughness: 0.28,
+      metalness: 0.15,
+      clearcoat: 0.5,
+      clearcoatRoughness: 0.15,
       flatShading: true,
     });
 
-    const blackBandMat = new THREE.MeshStandardMaterial({
-      color: 0x050505,
-      roughness: 0.8,
-      metalness: 0.2,
+    const slateBandMat = new THREE.MeshStandardMaterial({
+      color: 0x161922,
+      roughness: 0.6,
+      metalness: 0.25,
       flatShading: true,
     });
 
     const glowRedMat = new THREE.MeshBasicMaterial({
-      color: 0xFF2B06,
+      color: 0xFF6854,
     });
 
     // 1. Lower Stepped Base
@@ -85,7 +85,7 @@ export const CinematicRook: React.FC<CinematicRookProps> = ({
 
     const baseRing = new THREE.Mesh(
       new THREE.CylinderGeometry(1.3, 1.35, 0.15, 16),
-      blackBandMat
+      slateBandMat
     );
     baseRing.position.y = -1.5;
     rookGroup.add(baseRing);
@@ -98,15 +98,15 @@ export const CinematicRook: React.FC<CinematicRookProps> = ({
     trunk.position.y = -0.35;
     rookGroup.add(trunk);
 
-    // 3. Black Waist Band (where FINROOK branding sits)
+    // 3. Slate Waist Band
     const waistBand = new THREE.Mesh(
       new THREE.CylinderGeometry(1.02, 1.02, 0.7, 16),
-      blackBandMat
+      slateBandMat
     );
     waistBand.position.y = 0.9;
     rookGroup.add(waistBand);
 
-    // Subtle red luminous ring around waist
+    // Subtle luminous accent ring
     const waistGlow = new THREE.Mesh(
       new THREE.TorusGeometry(1.04, 0.02, 8, 32),
       glowRedMat
@@ -139,27 +139,19 @@ export const CinematicRook: React.FC<CinematicRookProps> = ({
       rookGroup.add(crenel);
     }
 
-    // Interior Red Light Source radiating upwards
-    const interiorLight = new THREE.PointLight(0xFF2B06, 5, 8);
-    interiorLight.position.set(0, 2.0, 0);
-    rookGroup.add(interiorLight);
-
-    // Cinematic Lighting
-    const ambientLight = new THREE.AmbientLight(0x221111, 2.0);
+    // Studio Lighting
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1.8);
     scene.add(ambientLight);
 
-    // White rim light for crisp architectural edge
-    const whiteRim = new THREE.DirectionalLight(0xffffff, 2.5);
+    const whiteRim = new THREE.DirectionalLight(0xffffff, 2.2);
     whiteRim.position.set(-5, 6, -4);
     scene.add(whiteRim);
 
-    // Intense Scarlet Key light
-    const redKey = new THREE.DirectionalLight(0xFF2B06, 4.0);
+    const redKey = new THREE.DirectionalLight(0xFF4D38, 3.2);
     redKey.position.set(5, 5, 4);
     scene.add(redKey);
 
-    // Soft overhead fill
-    const topLight = new THREE.DirectionalLight(0xffffff, 1.2);
+    const topLight = new THREE.DirectionalLight(0xfff7ed, 1.4);
     topLight.position.set(0, 8, 2);
     scene.add(topLight);
 
@@ -193,13 +185,11 @@ export const CinematicRook: React.FC<CinematicRookProps> = ({
       animationId = requestAnimationFrame(animate);
       const elapsed = clock.getElapsedTime();
 
-      // Slow majestic continuous rotation
-      const baseRotation = elapsed * 0.35;
+      const baseRotation = elapsed * 0.3;
       rookGroup.rotation.y += (baseRotation + mouseX * 0.4 - rookGroup.rotation.y) * 0.05;
       rookGroup.rotation.x += (-mouseY * 0.25 - rookGroup.rotation.x) * 0.05;
 
-      // Slow breath hover
-      rookGroup.position.y = Math.sin(elapsed * 1.5) * 0.08;
+      rookGroup.position.y = Math.sin(elapsed * 1.4) * 0.06;
 
       renderer.render(scene, camera);
     };
@@ -228,8 +218,8 @@ export const CinematicRook: React.FC<CinematicRookProps> = ({
   return (
     <div
       ref={containerRef}
-      className={`relative w-full h-full min-h-[380px] md:min-h-[480px] select-none cursor-grab active:cursor-grabbing ${className}`}
-      aria-label="Interactive Finrook 3D Scarlet Rook"
+      className={`relative w-full h-full min-h-[380px] md:min-h-[460px] select-none cursor-grab active:cursor-grabbing ${className}`}
+      aria-label="Interactive Finrook 3D Rook"
     />
   );
 };

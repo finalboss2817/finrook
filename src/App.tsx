@@ -1,127 +1,94 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Navigation } from './components/Navigation';
-import { ChapterOneHero } from './components/ChapterOneHero';
+import { ChakliHero } from './components/ChakliHero';
+import { MarqueeTicker } from './components/MarqueeTicker';
+import { AgencyCardsGrid } from './components/AgencyCardsGrid';
+import { InteractiveProofShowcase } from './components/InteractiveProofShowcase';
+import { ChakliCounterSection } from './components/ChakliCounterSection';
 import { ChapterTwoDisconnect } from './components/ChapterTwoDisconnect';
-import { ChapterThreeServices } from './components/ChapterThreeServices';
-import { ChapterFourPathways } from './components/ChapterFourPathways';
 import { ChapterFiveWorkflow } from './components/ChapterFiveWorkflow';
 import { ChapterSixPrinciples } from './components/ChapterSixPrinciples';
 import { ChapterSevenInquiry } from './components/ChapterSevenInquiry';
-import { StoryProgress } from './components/StoryProgress';
 import { Footer } from './components/Footer';
+import { TalkToStrategistModal } from './components/TalkToStrategistModal';
 
-export default function App() {
-  const [activeChapter, setActiveChapter] = useState<number>(1);
-  const [selectedService, setSelectedService] = useState<string>('Brand Management');
-  const [selectedNote, setSelectedNote] = useState<string>('');
+export const App: React.FC = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalService, setModalService] = useState('Brand Management');
 
-  // Scroll listener to update active narrative chapter
-  useEffect(() => {
-    const handleScroll = () => {
-      const sections = [
-        { id: 'hero', chapter: 1 },
-        { id: 'story', chapter: 2 },
-        { id: 'arenas', chapter: 3 },
-        { id: 'pathways', chapter: 4 },
-        { id: 'playbook', chapter: 5 },
-        { id: 'rules', chapter: 6 },
-        { id: 'inquiry', chapter: 7 },
-      ];
+  const handleOpenModal = (service?: string) => {
+    if (service) {
+      setModalService(service);
+    }
+    setIsModalOpen(true);
+  };
 
-      const scrollPosition = window.scrollY + window.innerHeight * 0.35;
-
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const el = document.getElementById(sections[i].id);
-        if (el && el.offsetTop <= scrollPosition) {
-          setActiveChapter(sections[i].chapter);
-          break;
-        }
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const scrollToSection = (sectionId: string) => {
+  const handleScrollToSection = (sectionId: string) => {
     const el = document.getElementById(sectionId);
     if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
-  };
-
-  const handleSelectChapter = (chapterNum: number) => {
-    const sectionMap: Record<number, string> = {
-      1: 'hero',
-      2: 'story',
-      3: 'arenas',
-      4: 'pathways',
-      5: 'playbook',
-      6: 'rules',
-      7: 'inquiry',
-    };
-    const targetId = sectionMap[chapterNum];
-    if (targetId) {
-      scrollToSection(targetId);
-    }
-  };
-
-  const handleNavigateToInquiry = (service?: string, note?: string) => {
-    if (service) setSelectedService(service);
-    if (note) setSelectedNote(note);
-    scrollToSection('inquiry');
   };
 
   return (
-    <div className="min-h-screen bg-[#0A0A0A] text-[#F4F4F5] flex flex-col selection:bg-[#FF2B06] selection:text-white">
-      {/* Top Bar Navigation */}
-      <Navigation onNavigateToInquiry={() => handleNavigateToInquiry()} />
-
-      {/* Floating Story Progress Tracker */}
-      <StoryProgress
-        activeChapter={activeChapter}
-        onSelectChapter={handleSelectChapter}
+    <div className="min-h-screen bg-[#FAF8F5] text-[#141518] selection:bg-[#FF4D38] selection:text-white flex flex-col antialiased">
+      {/* Chakli-Style Header & Navigation */}
+      <Navigation
+        onOpenModal={handleOpenModal}
+        onScrollToSection={handleScrollToSection}
       />
 
       <main className="flex-1">
-        {/* Chapter 01: Before the Move */}
-        <ChapterOneHero
-          onExploreStory={() => scrollToSection('story')}
-          onMakeMove={() => handleNavigateToInquiry()}
+        {/* 1. Chakli-Style Hero with Bold Tagline, 3D Rook & Floating Elements */}
+        <ChakliHero
+          onOpenModal={handleOpenModal}
+          onDiscoverClick={() => handleScrollToSection('services')}
         />
 
-        {/* Chapter 02: The Disconnect (Straightforward Reality Check) */}
+        {/* 2. Infinite Marquee Ticker */}
+        <MarqueeTicker />
+
+        {/* 3. Agency Showcase Grid ("We are a strategic agency that brings real business results") */}
+        <AgencyCardsGrid
+          onSelectService={(serviceName) => handleOpenModal(serviceName)}
+        />
+
+        {/* 4. Interactive Tabbed Deliverables Showcase */}
+        <InteractiveProofShowcase
+          onOpenModal={(serviceName) => handleOpenModal(serviceName)}
+        />
+
+        {/* 5. The Rook's Commitment Across 4 Disciplines */}
+        <ChakliCounterSection
+          onOpenModal={() => handleOpenModal('General Consultation')}
+        />
+
+        {/* 6. The Disconnect: Going it alone vs Backed by the Rook */}
         <ChapterTwoDisconnect />
 
-        {/* Chapter 03: Four Arenas (Visual High-Res Showcases) */}
-        <ChapterThreeServices
-          onSelectService={(service) =>
-            handleNavigateToInquiry(service, `Inquiring about ${service}.`)
-          }
-        />
-
-        {/* Chapter 04: Choose Your Move (Interactive Pathway Selection) */}
-        <ChapterFourPathways
-          onSelectPathwayForInquiry={(service, note) =>
-            handleNavigateToInquiry(service, note)
-          }
-        />
-
-        {/* Chapter 05: How It Works (Methodology) */}
+        {/* 7. The 4-Step Process (Understand, Plan, Coordinate, Execute) */}
         <ChapterFiveWorkflow />
 
-        {/* Chapter 06: The Standard (Core Principles) */}
+        {/* 8. Core Working Principles */}
         <ChapterSixPrinciples />
 
-        {/* Chapter 07: Your Next Move (Inquiry Form & Direct Channels) */}
-        <ChapterSevenInquiry
-          initialService={selectedService}
-          initialNote={selectedNote}
-        />
+        {/* 9. Direct Inquiry Suite with Masked Phone & WhatsApp */}
+        <section id="contact">
+          <ChapterSevenInquiry initialService={modalService} />
+        </section>
       </main>
 
-      {/* Footer */}
+      {/* 10. Footer */}
       <Footer />
+
+      {/* Chakli-style Quick Inquiry / Talk to Strategist Modal */}
+      <TalkToStrategistModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        initialService={modalService}
+      />
     </div>
   );
-}
+};
+
+export default App;

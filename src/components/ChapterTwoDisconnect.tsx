@@ -1,147 +1,171 @@
 import React, { useState } from 'react';
-import { AlertCircle, CheckCircle2 } from 'lucide-react';
+import { AlertCircle, CheckCircle2, Split, ArrowRight } from 'lucide-react';
 import { FinrookLogo } from './FinrookLogo';
 
 export const ChapterTwoDisconnect: React.FC = () => {
-  const [isAligned, setIsAligned] = useState(false);
+  const [showAligned, setShowAligned] = useState(false);
 
   const pillars = [
     {
       id: 1,
       title: 'Your Brand',
-      tag: '01 · Identity',
-      alone: 'A cheap logo, mismatched fonts on social media, and no clear way to explain why someone should choose you.',
-      withRook: 'A sharp, distinctive look and clear message that immediately commands respect when someone lands on your page.',
+      tag: '01 · Identity & Positioning',
+      alone: 'A generic logo, inconsistent fonts on social media, and no clear reason why a customer or sponsor should pick you over anyone else.',
+      withRook: 'A sharp, distinctive visual presence and crisp messaging that immediately makes your business look established, premium, and trustworthy.',
     },
     {
       id: 2,
       title: 'Creator Deals',
-      tag: '02 · Partnerships',
-      alone: 'Brands offering you free merchandise instead of real money, endless back-and-forth emails, and delayed payments.',
-      withRook: 'Real paid brand deals, transparent contracts that protect you, and partnerships aligned with your audience.',
+      tag: '02 · Partnerships & Sponsorships',
+      alone: 'Brands pitching lowball barter deals instead of real money, endless back-and-forth email delays, and chasing late invoices for months.',
+      withRook: 'Real commercial brand deals, transparent contracts that protect your rights, and sponsorships matched to your actual audience.',
     },
     {
       id: 3,
       title: 'Live Events',
-      tag: '03 · Execution',
-      alone: 'Flaky suppliers, late sound crews, ticket sales lagging, and you running around stressed out of your mind on show day.',
-      withRook: 'A packed room, electric sound and lighting, flawless staging, and an on-ground crew handling every single issue.',
+      tag: '03 · Real-World Production',
+      alone: 'Unreliable vendors, sound check delays, ticket sales moving slowly, and you running around backstage stressed out of your mind on show day.',
+      withRook: 'A packed venue, punchy audio and stage lighting, smooth crowd check-ins, and an on-ground crew handling every logistical fire.',
     },
     {
       id: 4,
       title: 'Content & Videos',
-      tag: '04 · Media',
-      alone: 'Spending hours making random reels that get 200 views, burning out trying to feed algorithms alone.',
-      withRook: 'High-hook videos and photography shot on cinema gear, scripted cleanly, and delivered on a planned schedule.',
+      tag: '04 · Creative Media',
+      alone: 'Spending hours filming random reels that barely reach 200 views, burning yourself out trying to feed the algorithms without a roadmap.',
+      withRook: 'Clear storytelling and high-hook videos shot with cinema lenses and good lighting, planned on a consistent schedule that builds genuine fans.',
     },
   ];
 
   return (
     <section
       id="story"
-      className="py-24 px-6 lg:px-16 bg-[#0E0E0E] border-b border-[#1E1E1E]"
+      className="py-24 px-6 lg:px-16 bg-[#F5F2EB] border-b border-[#E5DFC0]"
     >
       <div className="max-w-7xl mx-auto w-full">
         {/* Chapter Header */}
-        <div className="pb-8 border-b border-[#222222] flex items-center justify-between text-xs tracking-wider uppercase text-[#71717A] font-mono">
-          <span>THE REALITY CHECK</span>
-          <span>CHAPTER 02 · THE DISCONNECT</span>
+        <div className="pb-6 border-b border-[#E5DFC0] flex items-center justify-between text-xs tracking-wider uppercase text-[#6E6A61] font-mono">
+          <span className="font-semibold text-[#141518]">THE REALITY CHECK</span>
+          <span className="text-[#5C5952]">CHAPTER 03 · THE DISCONNECT</span>
         </div>
 
         {/* Narrative Heading */}
         <div className="mt-12 max-w-3xl">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-tight">
+          <div className="inline-block text-xs font-bold uppercase tracking-wider text-[#E1382B] mb-3">
+            Why Ambitious Moves Stall
+          </div>
+
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#141518] leading-tight">
             Having an idea is one thing. <br />
-            <span className="text-[#FF2B06]">Bringing it all together is another.</span>
+            <span className="text-[#E1382B]">Connecting the pieces is another.</span>
           </h2>
 
-          <p className="mt-6 text-base sm:text-lg text-[#A1A1AA] leading-relaxed font-normal">
-            A brand needs direction. A creator needs the right opportunities. An event needs people, planning, and timing. And content needs a reason to exist.
+          <p className="mt-6 text-base sm:text-lg text-[#5C5952] leading-relaxed font-normal">
+            A brand needs direction. A creator needs genuine paid opportunities. An event needs technical coordination and crowd momentum. And content needs purpose. When these pieces operate in silos, you burn time and money.
           </p>
 
-          <p className="mt-3 text-base sm:text-lg text-[#A1A1AA] leading-relaxed font-normal">
-            When everything is handled separately, the little details quickly turn into headaches that stall great projects. Finrook brings the right people, planning, and execution under one roof.
-          </p>
-        </div>
-
-        {/* State Toggle */}
-        <div className="mt-10 flex flex-wrap items-center gap-3 p-1.5 bg-[#141414] border border-[#27272A] rounded-lg max-w-md">
-          <button
-            type="button"
-            onClick={() => setIsAligned(false)}
-            className={`flex-1 py-2 px-4 text-xs font-semibold rounded-md transition-all cursor-pointer ${
-              !isAligned
-                ? 'bg-[#27272A] text-white shadow-xs'
-                : 'text-[#71717A] hover:text-white'
-            }`}
-          >
-            Doing It Alone
-          </button>
-          <button
-            type="button"
-            onClick={() => setIsAligned(true)}
-            className={`flex-1 py-2 px-4 text-xs font-semibold rounded-md transition-all cursor-pointer ${
-              isAligned
-                ? 'bg-[#FF2B06] text-white shadow-xs'
-                : 'text-[#71717A] hover:text-white'
-            }`}
-          >
-            Backed by Finrook
-          </button>
-        </div>
-
-        {/* Comparison Grid */}
-        <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-          {pillars.map((p) => (
-            <div
-              key={p.id}
-              className={`p-6 rounded-lg border transition-all duration-200 ${
-                isAligned
-                  ? 'bg-[#141414] border-[#FF2B06]/40 shadow-sm'
-                  : 'bg-[#111111] border-[#222222]'
+          {/* Interactive Toggle Switch */}
+          <div className="mt-8 flex items-center gap-4 bg-[#FFFFFF] p-2 rounded-xl border border-[#E5DFC0] w-fit shadow-xs">
+            <button
+              type="button"
+              onClick={() => setShowAligned(false)}
+              className={`px-4 py-2 text-xs font-bold rounded-lg transition-all cursor-pointer flex items-center gap-2 ${
+                !showAligned
+                  ? 'bg-[#141518] text-white shadow-2xs'
+                  : 'text-[#6E6A61] hover:text-[#141518]'
               }`}
             >
-              <div className="flex items-center justify-between pb-3 border-b border-[#222222] text-xs">
-                <span className="font-mono text-[#71717A]">{p.tag}</span>
-                <span
-                  className={`px-2 py-0.5 rounded-sm font-mono text-[11px] ${
-                    isAligned
-                      ? 'bg-[#FF2B06]/15 text-[#FF2B06]'
-                      : 'bg-[#1A1A1A] text-[#71717A]'
-                  }`}
-                >
-                  {isAligned ? 'Coordinated' : 'Siloed'}
+              <AlertCircle className="w-3.5 h-3.5 text-[#E1382B]" />
+              <span>Without Direction</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setShowAligned(true)}
+              className={`px-4 py-2 text-xs font-bold rounded-lg transition-all cursor-pointer flex items-center gap-2 ${
+                showAligned
+                  ? 'bg-[#E1382B] text-white shadow-2xs'
+                  : 'text-[#6E6A61] hover:text-[#141518]'
+              }`}
+            >
+              <CheckCircle2 className="w-3.5 h-3.5 text-white" />
+              <span>Backed by the Rook</span>
+            </button>
+          </div>
+        </div>
+
+        {/* Pillars Comparison Cards */}
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
+          {pillars.map((pillar) => (
+            <div
+              key={pillar.id}
+              className={`p-7 rounded-xl border transition-all duration-300 ${
+                showAligned
+                  ? 'bg-[#FFFFFF] border-[#C5A869]/60 shadow-sm'
+                  : 'bg-[#FFFFFF] border-[#E5DFC0] shadow-2xs'
+              }`}
+            >
+              <div className="flex items-center justify-between pb-4 border-b border-[#ECE6D8]">
+                <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#E1382B]">
+                  {pillar.tag}
                 </span>
+                <span className="text-xs font-mono text-[#8C887E]">0{pillar.id}</span>
               </div>
 
-              <h3 className="text-xl font-bold text-white mt-4">
-                {p.title}
+              <h3 className="text-xl font-bold text-[#141518] mt-4">
+                {pillar.title}
               </h3>
 
-              <div className="mt-3 text-sm leading-relaxed">
-                {isAligned ? (
-                  <div className="flex items-start gap-2.5 text-[#F4F4F5]">
-                    <CheckCircle2 className="w-4 h-4 text-[#FF2B06] shrink-0 mt-0.5" />
-                    <span>{p.withRook}</span>
+              <div className="mt-4 min-h-[96px] flex flex-col justify-center">
+                {showAligned ? (
+                  <div className="flex items-start gap-3 text-sm text-[#141518] leading-relaxed">
+                    <CheckCircle2 className="w-5 h-5 text-[#E1382B] shrink-0 mt-0.5" />
+                    <div>
+                      <span className="font-bold text-[#E1382B]">With Finrook: </span>
+                      <span className="text-[#4A4843]">{pillar.withRook}</span>
+                    </div>
                   </div>
                 ) : (
-                  <div className="flex items-start gap-2.5 text-[#A1A1AA]">
-                    <AlertCircle className="w-4 h-4 text-amber-500/80 shrink-0 mt-0.5" />
-                    <span>{p.alone}</span>
+                  <div className="flex items-start gap-3 text-sm text-[#6E6A61] leading-relaxed">
+                    <AlertCircle className="w-5 h-5 text-[#8C887E] shrink-0 mt-0.5" />
+                    <div>
+                      <span className="font-semibold text-[#141518]">On Your Own: </span>
+                      <span>{pillar.alone}</span>
+                    </div>
                   </div>
                 )}
+              </div>
+
+              <div className="mt-4 pt-4 border-t border-[#ECE6D8] flex items-center justify-between text-xs text-[#8C887E]">
+                <span>Status:</span>
+                <span className={`font-mono font-bold ${showAligned ? 'text-[#E1382B]' : 'text-[#8C887E]'}`}>
+                  {showAligned ? 'STRATEGY LOCKED' : 'DISCONNECTED'}
+                </span>
               </div>
             </div>
           ))}
         </div>
 
-        {/* Clean Anchor Footer */}
-        <div className="mt-8 flex items-center justify-between text-xs text-[#71717A] border-t border-[#1E1E1E] pt-6">
-          <div className="flex items-center gap-2">
-            <FinrookLogo size={18} />
-            <span>One partner. All moving parts aligned.</span>
+        {/* Narrative Footnote */}
+        <div className="mt-10 p-6 bg-[#FFFFFF] rounded-xl border border-[#E5DFC0] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div className="flex items-center gap-3.5">
+            <FinrookLogo size={32} />
+            <div>
+              <div className="font-bold text-sm text-[#141518]">
+                Finrook integrates your entire creative and operational pipeline.
+              </div>
+              <div className="text-xs text-[#6E6A61]">
+                No fragmented vendors. One unified team backing your moves.
+              </div>
+            </div>
           </div>
-          <span className="font-mono">FINROOK EXECUTION</span>
+
+          <a
+            href="#arenas"
+            className="inline-flex items-center gap-2 text-xs font-bold text-[#E1382B] hover:text-[#C92F23] transition-colors uppercase tracking-wider"
+          >
+            <span>See the Four Disciplines</span>
+            <ArrowRight className="w-4 h-4" />
+          </a>
         </div>
       </div>
     </section>

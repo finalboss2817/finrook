@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowUp } from 'lucide-react';
+import { ArrowUp, Phone, MessageCircle, Mail } from 'lucide-react';
 import { FinrookLogo } from './FinrookLogo';
 
 export const Footer: React.FC = () => {
@@ -8,37 +8,37 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="bg-[#050505] text-white py-16 px-6 lg:px-16 border-t border-[#1E1E1E]">
+    <footer className="bg-[#141518] text-[#FAF8F5] py-16 px-6 lg:px-16 border-t border-[#2A2C33]">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-[#1E1E1E]">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-[#2A2C33]">
           {/* Brand & Tagline */}
           <div className="md:col-span-5 flex flex-col justify-between">
             <div>
               <div className="flex items-center gap-3">
-                <FinrookLogo size={36} />
-                <span className="text-xl font-bold tracking-tight text-white">
+                <FinrookLogo size={36} contrastColor="#FAF8F5" primaryColor="#E1382B" />
+                <span className="text-xl font-extrabold tracking-tight text-white">
                   FINROOK
                 </span>
               </div>
-              <p className="mt-3 text-sm text-[#FF2B06] font-medium">
+              <p className="mt-3 text-sm text-[#E1382B] font-semibold">
                 Your next move backed by the rook.
               </p>
-              <p className="mt-3 text-xs text-[#71717A] max-w-sm leading-relaxed">
-                Working across brand management, creator sponsorships, event production of all scales, and digital content creation.
+              <p className="mt-3 text-xs text-[#A09C94] max-w-sm leading-relaxed">
+                Strategic brand management, creator sponsorships and partnerships, live event management of all kinds, and high-impact digital content creation.
               </p>
             </div>
 
-            <div className="mt-8 text-xs text-[#52525B] font-mono">
+            <div className="mt-8 text-xs text-[#737068] font-mono">
               © {new Date().getFullYear()} Finrook. All rights reserved.
             </div>
           </div>
 
           {/* Capabilities Navigation */}
           <div className="md:col-span-3">
-            <div className="text-xs font-mono uppercase tracking-wider text-[#FF2B06] mb-4">
+            <div className="text-xs font-mono uppercase tracking-wider text-[#E1382B] font-bold mb-4">
               Disciplines
             </div>
-            <ul className="space-y-2 text-xs text-[#A1A1AA]">
+            <ul className="space-y-2.5 text-xs text-[#A09C94]">
               <li>
                 <a href="#arenas" className="hover:text-white transition-colors">
                   Brand Management & Identity
@@ -56,87 +56,67 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <a href="#arenas" className="hover:text-white transition-colors">
-                  Content Creation & Production
+                  Content Creation & Management
                 </a>
               </li>
             </ul>
           </div>
 
-          {/* Story Navigation */}
-          <div className="md:col-span-2">
-            <div className="text-xs font-mono uppercase tracking-wider text-[#FF2B06] mb-4">
-              The Journey
+          {/* Contact & Inquiry Phone */}
+          <div className="md:col-span-4">
+            <div className="text-xs font-mono uppercase tracking-wider text-[#E1382B] font-bold mb-4">
+              Direct Contact
             </div>
-            <ul className="space-y-2 text-xs text-[#A1A1AA]">
+            <ul className="space-y-3 text-xs text-[#A09C94]">
               <li>
-                <a href="#hero" className="hover:text-white transition-colors">
-                  01 Before the Move
-                </a>
-              </li>
-              <li>
-                <a href="#story" className="hover:text-white transition-colors">
-                  02 The Disconnect
-                </a>
-              </li>
-              <li>
-                <a href="#arenas" className="hover:text-white transition-colors">
-                  03 Four Arenas
-                </a>
-              </li>
-              <li>
-                <a href="#pathways" className="hover:text-white transition-colors">
-                  04 Your Move
-                </a>
-              </li>
-              <li>
-                <a href="#playbook" className="hover:text-white transition-colors">
-                  05 The Methodology
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Direct Channels */}
-          <div className="md:col-span-2">
-            <div className="text-xs font-mono uppercase tracking-wider text-[#FF2B06] mb-4">
-              Contact
-            </div>
-            <div className="space-y-2 text-xs text-[#A1A1AA]">
-              <div>
-                <a
-                  href="mailto:hello@finrook.com"
-                  className="hover:text-white transition-colors"
-                >
-                  hello@finrook.com
-                </a>
-              </div>
-              <div>
                 <a
                   href="tel:+919920300750"
-                  className="hover:text-[#FF2B06] transition-colors"
+                  className="flex items-center gap-2 hover:text-white transition-colors group"
                 >
-                  +91 99203 00750
+                  <Phone className="w-3.5 h-3.5 text-[#E1382B]" />
+                  <span>Call: <strong className="text-white/90 group-hover:text-white tracking-wider">+91 99203 •••••</strong></span>
                 </a>
-              </div>
-              <div className="pt-2 text-[11px] text-[#71717A]">
-                Global Operations
-              </div>
+              </li>
+              <li>
+                <a
+                  href="https://wa.me/919920300750?text=Hi%20Finrook%2C%20I%20would%20like%20to%20discuss%20my%20next%20move"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 hover:text-[#25D366] transition-colors"
+                >
+                  <MessageCircle className="w-3.5 h-3.5 text-[#25D366]" />
+                  <span>Chat on WhatsApp</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="mailto:hello@finrook.com"
+                  className="flex items-center gap-2 hover:text-white transition-colors"
+                >
+                  <Mail className="w-3.5 h-3.5 text-[#E1382B]" />
+                  <span>Email: hello@finrook.com</span>
+                </a>
+              </li>
+            </ul>
+
+            <div className="mt-6 pt-6 border-t border-[#2A2C33]">
+              <span className="text-[11px] font-mono text-[#737068]">
+                LOCATION: Mumbai, Maharashtra • India
+              </span>
             </div>
           </div>
         </div>
 
         {/* Bottom bar */}
-        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#71717A]">
-          <div className="flex items-center gap-2">
-            <span>Every great move starts with an idea.</span>
-            <span aria-hidden="true">·</span>
-            <span className="text-white font-medium">Backed by the rook.</span>
+        <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#737068]">
+          <div>
+            Built with clarity. No buzzwords, no fluff.
           </div>
 
           <button
             type="button"
             onClick={scrollToTop}
-            className="inline-flex items-center gap-1.5 text-xs text-[#A1A1AA] hover:text-[#FF2B06] transition-colors cursor-pointer"
+            className="flex items-center gap-1.5 hover:text-white transition-colors cursor-pointer"
           >
             <span>Back to top</span>
             <ArrowUp className="w-3.5 h-3.5" />

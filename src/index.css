@@ -2,17 +2,24 @@
 
 @layer base {
   :root {
-    --color-bg: #0A0A0A;
-    --color-surface: #141414;
-    --color-border: #242424;
-    --color-red: #FF2B06;
+    --color-bg: #FAF8F5;
+    --color-surface: #F2EDE4;
+    --color-surface-raised: #FFFFFF;
+    --color-border: #E5DFC0;
+    --color-border-subtle: #ECE6D8;
+    --color-text-main: #141518;
+    --color-text-muted: #646770;
+    --color-red: #FF4D38;
+    --color-red-hover: #E63F2C;
+    --color-emerald: #0C2B1E;
   }
 
   body {
-    background-color: #0A0A0A;
-    color: #F4F4F5;
+    background-color: #FAF8F5;
+    color: #141518;
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     letter-spacing: -0.01em;
+    overflow-x: hidden;
   }
 
   h1, h2, h3, h4 {
@@ -21,17 +28,49 @@
   }
 }
 
-/* Clean, modern scrollbar */
+/* Custom ivory & red scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 7px;
 }
 ::-webkit-scrollbar-track {
-  background: #0A0A0A;
+  background: #FAF8F5;
 }
 ::-webkit-scrollbar-thumb {
-  background: #27272A;
-  border-radius: 3px;
+  background: #D8D2C4;
+  border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #FF2B06;
+  background: #FF4D38;
+}
+
+/* Chakli-inspired animations */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.98); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.animate-marquee {
+  animation: marquee 26s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
